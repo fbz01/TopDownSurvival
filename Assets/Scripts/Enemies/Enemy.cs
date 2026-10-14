@@ -1,13 +1,14 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Health), typeof(Animator))]
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IKnockable
 {
     [SerializeField] private float moveSpeed = 2f;
     [SerializeField] private int contactDamage = 10;
     [SerializeField] private float damageCooldown = 1f;
     [SerializeField] private int scoreValue = 10;
     [SerializeField] private float deathDuration = 0.5f;
+    [SerializeField] private float hurtDuration = 0.2f;
 
     public int ScoreValue => scoreValue;
     public bool IsDead { get; private set; }
@@ -18,6 +19,8 @@ public class Enemy : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Transform player;
     private float nextDamageTime;
+    private float stunnedUntil;
+    private bool IsStunned => Time.time < stunnedUntil;
 
     private void Awake()
     {
@@ -43,6 +46,12 @@ public class Enemy : MonoBehaviour
             return;
         }
 
+        if (IsStunned)
+        {
+            rb.linearVelocity *= 0.85f; // bromsa in knuffen mjukt
+            return;
+        }
+
         // jaga spelaren
         Vector2 direction = ((Vector2)player.position - rb.position).normalized;
         rb.linearVelocity = direction * moveSpeed;
@@ -50,7 +59,7 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        if (IsDead) return;
+        if (IsDead || IsStunned) return;
 
         Vector2 velocity = rb.linearVelocity;
         animator.SetBool("IsMoving", velocity.sqrMagnitude > 0.01f);
@@ -61,7 +70,7 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (IsDead || Time.time < nextDamageTime) return;
+        if (IsDead || IsStunned || Time.time < nextDamageTime) return;
         if (!collision.gameObject.CompareTag("Player")) return;
 
         if (collision.gameObject.TryGetComponent(out IDamageable target))
@@ -69,6 +78,15 @@ public class Enemy : MonoBehaviour
             target.TakeDamage(contactDamage);
             nextDamageTime = Time.time + damageCooldown;
         }
+    }
+
+    public void ApplyKnockback(Vector2 direction, float force)
+    {
+        if (IsDead) return;
+
+        rb.linearVelocity = direction * force;
+        stunnedUntil = Time.time + hurtDuration;
+        animator.SetTrigger("Hurt");
     }
 
     private void Die()

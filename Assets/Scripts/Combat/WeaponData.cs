@@ -10,6 +10,7 @@ public class WeaponData : ScriptableObject
     [SerializeField] private float attacksPerSecond = 2f;
     [SerializeField] private float range = 0.8f;
     [SerializeField] private float radius = 0.6f;
+    [SerializeField] private float knockbackForce = 6f;
 
     public string DisplayName => displayName;
     public Sprite Icon => icon;
@@ -17,4 +18,5 @@ public class WeaponData : ScriptableObject
     public float AttacksPerSecond => attacksPerSecond;
     public float Range => range;
     public float Radius => radius; 
+    public float KnockbackForce => knockbackForce;
 }

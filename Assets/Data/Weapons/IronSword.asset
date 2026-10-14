@@ -16,5 +16,5 @@ MonoBehaviour:
   icon: {fileID: 0}
   baseDamage: 10
   attacksPerSecond: 2
-  range: 0.8
-  radius: 0.6
+  range: 0.5
+  radius: 0.5

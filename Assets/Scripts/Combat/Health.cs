@@ -22,24 +22,15 @@ public class Health : MonoBehaviour, IDamageable
         OnHealthChanged?.Invoke(Current, maxHealth);
     }
 
-    public void TakeDamage(int baseDamage, PlayerStats attackerStats = null)
+    public void TakeDamage(int amount)
     {
-        if (Current <= 0) return; // redan död
-        int totalDamage = baseDamage;
+        if (Current <= 0) return;
 
-        if (attackerStats != null)
-        {
-            totalDamage += attackerStats.strength;
-
-            if (UnityEngine.Random.Range(0, 100) < attackerStats.luck)
-                totalDamage *= 2;
-        }
-
-        Current = Mathf.Max(Current - totalDamage, 0);
+        Current = Mathf.Max(Current - amount, 0);
         OnHealthChanged?.Invoke(Current, maxHealth);
-        
-            if (Current == 0)
-        OnDied?.Invoke();
+
+        if (Current == 0)
+            OnDied?.Invoke();
     }
 
     public void Heal(int amount)

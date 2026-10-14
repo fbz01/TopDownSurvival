@@ -2,11 +2,11 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof (PlayerController), typeof (PlayerStats))]
+[RequireComponent(typeof(PlayerController), typeof(PlayerStats))]
 public class Weapon : MonoBehaviour
 {
     [SerializeField] private WeaponData currentWeapon;
-    [SerializeField] private Vector2 bodyOffset = new Vector2(0f,05f);
+    [SerializeField] private Vector2 bodyOffset = new Vector2(0f, 05f);
 
     private PlayerController controller;
     private PlayerStats stats;
@@ -44,34 +44,49 @@ public class Weapon : MonoBehaviour
         OnWeaponChanged?.Invoke(newWeapon);
     }
 
+    private int CalculateDamage()
+    {
+        int damage = currentWeapon.BaseDamage + stats.BonusDamage + stats.strength;
+
+        if (UnityEngine.Random.Range(0, 100) < stats.luck)
+            damage *= 2;
+        return damage;
+    }
+
     private void Attack()
     {
         nextAttackTime = Time.time + AttackCooldown;
 
-        Collider2D[] hits = Physics2D.OverlapCircleAll(HitCenter(), currentWeapon.Radius);
-        foreach ( Collider2D hit in hits)
+        Collider2D[] hits = Physics2D.OverlapCircleAll(GetHitCenter(), currentWeapon.Radius);
+        foreach (Collider2D hit in hits)
         {
-            Debug.Log($"  - {hit.name}");
             if (hit.gameObject == gameObject) continue;
 
             if (hit.TryGetComponent(out IDamageable target))
-                target.TakeDamage(Damage, stats);
-                Debug.Log($"  {hit.name} tog {Damage} skada");
+            {
+                target.TakeDamage(Damage); // eller er CalculateDamage()
+
+                if (hit.TryGetComponent(out IKnockable knockbackable))
+                {
+                    Vector2 away = ((Vector2)hit.transform.position - (Vector2)transform.position).normalized;
+                    knockbackable.ApplyKnockback(away, currentWeapon.KnockbackForce);
+                }
+            }
         }
         OnAttack?.Invoke(controller.FacingDirection);
     }
 
-        private Vector2 HitCenter()
+    public Vector2 GetHitCenter()
     {
         return (Vector2)transform.position + bodyOffset
              + controller.FacingDirection * currentWeapon.Range;
     }
 
-        private void OnDrawGizmosSelected()
+    private void OnDrawGizmosSelected()
     {
         if (currentWeapon == null) return;
         if (controller == null) controller = GetComponent<PlayerController>();
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(HitCenter(), currentWeapon.Radius);
+        Gizmos.DrawWireSphere(GetHitCenter(), currentWeapon.Radius);
     }
 }

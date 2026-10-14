@@ -14,6 +14,10 @@ GameObject:
   - component: {fileID: 3642266204843880375}
   - component: {fileID: 3492373557261401431}
   - component: {fileID: 4538694701449065697}
+  - component: {fileID: 2151446837495640961}
+  - component: {fileID: 1314943436973754794}
+  - component: {fileID: 4447546102870922375}
+  - component: {fileID: 2630894037882473271}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -204,3 +208,58 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2151446837495640961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904111813152331484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c10c01e4e1e95242b3b12ca0f24ac82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::PlayerStats
+  bonusDamage: 0
+  attackSpeedMultiplier: 1
+--- !u!114 &1314943436973754794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904111813152331484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fac505fe7b76250499ea6ad346cae21f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Weapon
+  currentWeapon: {fileID: 11400000, guid: ed5480264c8548945836b8cec8c83d5c, type: 2}
+  bodyOffset: {x: 0, y: 0.6}
+--- !u!114 &4447546102870922375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904111813152331484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc65f3e1e0bfb1043b7e223048251ccd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::SwordSwing
+  slashEffectPrefab: {fileID: 2001118695858072744, guid: 36d02454bb3f0bb44926b00b3219d188, type: 3}
+  slashLifetime: 0.3
+--- !u!114 &2630894037882473271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904111813152331484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab14165992bc77b4a8f63f61f7975dbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Health
+  maxHealth: 100

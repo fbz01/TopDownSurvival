@@ -27,21 +27,21 @@ public class HealthTests
     [Test]
     public void TakeDamage_ReducesCurrentHealth()
     {
-        health.TakeDamage(30, attackerStats);
+        health.TakeDamage(30);
         Assert.AreEqual(70, health.Current);
     }
 
     [Test]
     public void TakeDamage_NeverGoesBelowZero()
     {
-        health.TakeDamage(500, attackerStats);
+        health.TakeDamage(500);
         Assert.AreEqual(0, health.Current);
     }
 
     [Test]
     public void Heal_RaisesCurrentHealth()
     {
-        health.TakeDamage(50, attackerStats);
+        health.TakeDamage(50);
         health.Heal(20);
         Assert.AreEqual(70, health.Current);
     }
@@ -49,7 +49,7 @@ public class HealthTests
     [Test]
     public void Heal_NeverGoesAboveMax()
     {
-        health.TakeDamage(20, attackerStats);
+        health.TakeDamage(20);
         health.Heal(50);
         Assert.AreEqual(100, health.Current);
     }
