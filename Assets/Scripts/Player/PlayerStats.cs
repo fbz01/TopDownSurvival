@@ -11,7 +11,7 @@ public class PlayerStats : MonoBehaviour
     {
         // Initialize player stats
         strength = 5;
-        luck = 1;
+        luck = 10;
     }
 
     // Update is called once per frame
