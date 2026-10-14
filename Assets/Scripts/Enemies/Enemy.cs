@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D), typeof (Health), typeof(Animator))]
+[RequireComponent(typeof(Rigidbody2D), typeof(Health), typeof(Animator))]
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 2f;
@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float deathDuration = 0.5f;
 
     public int ScoreValue => scoreValue;
-    public bool isDead {get; private set;}
+    public bool IsDead { get; private set; }
 
     private Rigidbody2D rb;
     private Health health;
@@ -33,10 +33,11 @@ public class Enemy : MonoBehaviour
         if (playerObject != null)
             player = playerObject.transform;
     }
-
+    private void OnEnable() => health.OnDied += Die;
+    private void OnDisable() => health.OnDied -= Die;
     private void FixedUpdate()
     {
-        if (isDead || player == null)
+        if (IsDead || player == null)
         {
             rb.linearVelocity = Vector2.zero;
             return;
@@ -49,12 +50,36 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        if (isDead) return;
+        if (IsDead) return;
 
         Vector2 velocity = rb.linearVelocity;
         animator.SetBool("IsMoving", velocity.sqrMagnitude > 0.01f);
 
         if (Mathf.Abs(velocity.x) > 0.01f)
             spriteRenderer.flipX = velocity.x < 0;
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (IsDead || Time.time < nextDamageTime) return;
+        if (!collision.gameObject.CompareTag("Player")) return;
+
+        if (collision.gameObject.TryGetComponent(out IDamageable target))
+        {
+            target.TakeDamage(contactDamage);
+            nextDamageTime = Time.time + damageCooldown;
+        }
+    }
+
+    private void Die()
+    {
+        IsDead = true;
+        rb.linearVelocity = Vector2.zero;
+        GetComponent<Collider2D>().enabled = false; // inga fler träffar eller knuffar
+
+        animator.SetTrigger("Die");
+        //GameEvents.EnemyKilled(this);
+
+        Destroy(gameObject, deathDuration); // ta bort när animationen har spelats
     }
 }

@@ -51,10 +51,12 @@ public class Weapon : MonoBehaviour
         Collider2D[] hits = Physics2D.OverlapCircleAll(HitCenter(), currentWeapon.Radius);
         foreach ( Collider2D hit in hits)
         {
+            Debug.Log($"  - {hit.name}");
             if (hit.gameObject == gameObject) continue;
 
             if (hit.TryGetComponent(out IDamageable target))
-                target.TakeDamage(Damage);
+                target.TakeDamage(Damage, stats);
+                Debug.Log($"  {hit.name} tog {Damage} skada");
         }
         OnAttack?.Invoke(controller.FacingDirection);
     }

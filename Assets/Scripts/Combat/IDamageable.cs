@@ -1,4 +1,4 @@
 public interface IDamageable
 {
-    void TakeDamage(int amount, PlayerStats attackerStats);
+    void TakeDamage(int amount, PlayerStats attackerStats = null);
 }

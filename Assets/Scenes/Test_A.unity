@@ -466,10 +466,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 1904111813152331484, guid: 08ceda45a014fe147906a05bba4560d6, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
     - target: {fileID: 8895247868741948612, guid: 08ceda45a014fe147906a05bba4560d6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.0808
@@ -567,94 +563,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
-    - target: {fileID: 5744126779252846277, guid: 6671fe572dac3c5469448bea21513811, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 7363166705265310760, guid: 7f544e0dcb498c9489e332b8c4bec18a, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4767175782690883853, guid: 6671fe572dac3c5469448bea21513811, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8447098050267078742}
-    - targetCorrespondingSourceObject: {fileID: 4767175782690883853, guid: 6671fe572dac3c5469448bea21513811, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8447098050267078741}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6671fe572dac3c5469448bea21513811, type: 3}
---- !u!1 &8447098050267078740 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4767175782690883853, guid: 6671fe572dac3c5469448bea21513811, type: 3}
-  m_PrefabInstance: {fileID: 8447098050267078739}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &8447098050267078741
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8447098050267078740}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3b9c0c2dfcfcfb44283b778de72a9480, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!61 &8447098050267078742
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8447098050267078740}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.61875}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.1}
-    oldSize: {x: 1.15625, y: 1.546875}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 1.15625, y: 1.546875}
-  m_EdgeRadius: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
