@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 moveInput;
     private Vector2 lastDirection = Vector2.down;
-
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
