@@ -4,6 +4,7 @@ using UnityEngine;
 public class HealthTests
 {
     private Health health;
+    private PlayerStats attackerStats;
 
     // setup körs före test
     [SetUp]
@@ -11,6 +12,8 @@ public class HealthTests
     {
         health = new GameObject("TestObject").AddComponent<Health>();
         health.ResetHealth();
+
+        attackerStats = new GameObject("TestPlayer").AddComponent<PlayerStats>();
     }
 
     // teardown städar upp och körs efter testet
@@ -18,26 +21,27 @@ public class HealthTests
     public void TearDown()
     {
         Object.DestroyImmediate(health.gameObject);
+        Object.DestroyImmediate(attackerStats.gameObject);
     }
 
     [Test]
     public void TakeDamage_ReducesCurrentHealth()
     {
-        health.TakeDamage(30);
+        health.TakeDamage(30, attackerStats);
         Assert.AreEqual(70, health.Current);
     }
 
     [Test]
     public void TakeDamage_NeverGoesBelowZero()
     {
-        health.TakeDamage(500);
+        health.TakeDamage(500, attackerStats);
         Assert.AreEqual(0, health.Current);
     }
 
     [Test]
     public void Heal_RaisesCurrentHealth()
     {
-        health.TakeDamage(50);
+        health.TakeDamage(50, attackerStats);
         health.Heal(20);
         Assert.AreEqual(70, health.Current);
     }
@@ -45,7 +49,7 @@ public class HealthTests
     [Test]
     public void Heal_NeverGoesAboveMax()
     {
-        health.TakeDamage(20);
+        health.TakeDamage(20, attackerStats);
         health.Heal(50);
         Assert.AreEqual(100, health.Current);
     }

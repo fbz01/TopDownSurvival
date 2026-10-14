@@ -7,19 +7,12 @@ public class Health : MonoBehaviour, IDamageable
     [SerializeField] private int maxHealth = 100;
     public int Current {get; private set;}
 
-    [SerializeField] private PlayerStats playerStats;
-
     public event Action<int, int> OnHealthChanged; // event att lyssna på <nuvarande health, max health>
 
     // metod för testerna
     private void Awake()
     {
         ResetHealth();
-
-        if (playerStats == null)
-        {
-            playerStats = GetComponent<PlayerStats>();
-        }
     } 
     
     // metod för testerna
@@ -29,9 +22,15 @@ public class Health : MonoBehaviour, IDamageable
         OnHealthChanged?.Invoke(Current, maxHealth);
     }
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(int baseDamage, PlayerStats attackerStats)
     {
-        int totalDamage = amount * playerStats.strength * playerStats.luck;
+        int totalDamage = baseDamage + attackerStats.strength;
+
+        if (UnityEngine.Random.Range(0, 100) < attackerStats.luck)
+        {
+            totalDamage *= 2;
+        }
+
         Current = Mathf.Max(Current - totalDamage, 0);
         OnHealthChanged?.Invoke(Current, maxHealth);
     }
