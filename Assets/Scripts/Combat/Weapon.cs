@@ -1,0 +1,75 @@
+using System;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+[RequireComponent(typeof (PlayerController), typeof (PlayerStats))]
+public class Weapon : MonoBehaviour
+{
+    [SerializeField] private WeaponData currentWeapon;
+    [SerializeField] private Vector2 bodyOffset = new Vector2(0f,05f);
+
+    private PlayerController controller;
+    private PlayerStats stats;
+    private float nextAttackTime;
+
+    public WeaponData CurrentWeapon => currentWeapon;
+    public int Damage => currentWeapon.BaseDamage + stats.BonusDamage;
+    public float AttackCooldown =>
+        1f / (currentWeapon.AttacksPerSecond * stats.AttackSpeedMultiplier);
+
+    public event Action<Vector2> OnAttack;
+    public event Action<WeaponData> OnWeaponChanged;
+
+    private void Awake()
+    {
+        controller = GetComponent<PlayerController>();
+        stats = GetComponent<PlayerStats>();
+    }
+
+    private void Update()
+    {
+        if (currentWeapon == null) return;
+
+        Keyboard keyboard = Keyboard.current;
+        if (keyboard == null) return;
+
+        if (keyboard.spaceKey.isPressed && Time.time >= nextAttackTime)
+            Attack();
+    }
+
+    public void Equip(WeaponData newWeapon)
+    {
+        if (newWeapon == null) return;
+        currentWeapon = newWeapon;
+        OnWeaponChanged?.Invoke(newWeapon);
+    }
+
+    private void Attack()
+    {
+        nextAttackTime = Time.time + AttackCooldown;
+
+        Collider2D[] hits = Physics2D.OverlapCircleAll(HitCenter(), currentWeapon.Radius);
+        foreach ( Collider2D hit in hits)
+        {
+            if (hit.gameObject == gameObject) continue;
+
+            if (hit.TryGetComponent(out IDamageable target))
+                target.TakeDamage(Damage);
+        }
+        OnAttack?.Invoke(controller.FacingDirection);
+    }
+
+        private Vector2 HitCenter()
+    {
+        return (Vector2)transform.position + bodyOffset
+             + controller.FacingDirection * currentWeapon.Range;
+    }
+
+        private void OnDrawGizmosSelected()
+    {
+        if (currentWeapon == null) return;
+        if (controller == null) controller = GetComponent<PlayerController>();
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(HitCenter(), currentWeapon.Radius);
+    }
+}
