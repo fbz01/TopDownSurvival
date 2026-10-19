@@ -90,7 +90,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 4723107735738678597, guid: 569ba5f86e3946843852b3999d1dac70, type: 3}
+  m_Sprite: {fileID: 3773540668830692810, guid: c75632cc1aa5de04daf84649840dc549, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -113,7 +113,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 10
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 0
@@ -165,8 +165,8 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0.3}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 1, y: 1.609375}
+    pivot: {x: 0.5, y: 0.125}
+    oldSize: {x: 2, y: 2}
     newSize: {x: 1.06, y: 2.76}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -187,6 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   moveSpeed: 5
+  knockbackDuration: 0.15
 --- !u!95 &4538694701449065697
 Animator:
   serializedVersion: 7

@@ -2,9 +2,10 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(PlayerStats), typeof(Health))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IKnockable
 {
     [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float knockbackDuration = 0.15f;
 
     private Rigidbody2D rb;
     private Animator animator;
@@ -13,6 +14,8 @@ public class PlayerController : MonoBehaviour
     private Vector2 lastDirection = Vector2.down;
     public Vector2 FacingDirection => lastDirection;
     private Health health;
+    private float knockedUntil;
+    private bool IsKnockedBack => Time.time < knockedUntil;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -26,8 +29,10 @@ public class PlayerController : MonoBehaviour
     private void HandleDeath()
     {
         rb.linearVelocity = Vector2.zero;
-        rb.bodyType = RigidbodyType2D.Kinematic;  // påverkas inte längre av knuffar
+        rb.bodyType = RigidbodyType2D.Kinematic;
         GetComponent<Collider2D>().enabled = false;
+        GetComponent<Weapon>().enabled = false;
+        animator.SetTrigger("Die");
         enabled = false;
         GameEvents.PlayerDied();
     }
@@ -39,6 +44,12 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (IsKnockedBack)
+        {
+            rb.linearVelocity *= 0.85f;
+            return;
+        }
+
         rb.linearVelocity = moveInput * moveSpeed;
     }
 
@@ -68,5 +79,13 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("MoveY", lastDirection.y);
 
         spriteRenderer.flipX = lastDirection.x < 0;
+    }
+
+    public void ApplyKnockback(Vector2 direction, float force)
+    {
+        if (!enabled) return;
+
+        rb.linearVelocity = direction * force;
+        knockedUntil = Time.time + knockbackDuration;
     }
 }
