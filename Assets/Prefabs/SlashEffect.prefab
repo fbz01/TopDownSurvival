@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4275602750092459680}
   - component: {fileID: 9165645656028852043}
   - component: {fileID: 901432202016078913}
+  - component: {fileID: -8807282206355395857}
   m_Layer: 0
   m_Name: SlashEffect
   m_TagString: Untagged
@@ -82,7 +83,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 4176362632249098406, guid: 0e75cdc34f07a0a40b5d803cf6e5a14d, type: 3}
+  m_Sprite: {fileID: -353887294051298050, guid: 3be3e83af625ca24f84afbc1db07eab0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -115,3 +116,16 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-8807282206355395857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2001118695858072744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cec8bd65efeadb749bd401ac725d077d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::MoveForward
+  speed: 2

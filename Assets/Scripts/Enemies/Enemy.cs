@@ -9,6 +9,8 @@ public class Enemy : MonoBehaviour, IKnockable
     [SerializeField] private int scoreValue = 10;
     [SerializeField] private float deathDuration = 0.5f;
     [SerializeField] private float hurtDuration = 0.2f;
+    [SerializeField] private float contactKnockback = 8f;
+    [SerializeField] private float recoilForce = 3f;
 
     public int ScoreValue => scoreValue;
     public bool IsDead { get; private set; }
@@ -77,6 +79,14 @@ public class Enemy : MonoBehaviour, IKnockable
         {
             target.TakeDamage(contactDamage);
             nextDamageTime = Time.time + damageCooldown;
+
+            Vector2 pushDirection = ((Vector2)collision.transform.position - rb.position).normalized;
+
+            if (collision.gameObject.TryGetComponent(out IKnockable knockable))
+                knockable.ApplyKnockback(pushDirection, contactKnockback);
+
+            rb.linearVelocity = -pushDirection * recoilForce;
+            stunnedUntil = Time.time + 0.3f;
         }
     }
 

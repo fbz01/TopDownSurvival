@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 1314943436973754794}
   - component: {fileID: 4447546102870922375}
   - component: {fileID: 2630894037882473271}
+  - component: {fileID: 3421652555131118020}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -90,7 +91,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 4723107735738678597, guid: 569ba5f86e3946843852b3999d1dac70, type: 3}
+  m_Sprite: {fileID: 3773540668830692810, guid: c75632cc1aa5de04daf84649840dc549, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,7 +100,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
   m_BlendShapeWeights: []
 --- !u!50 &3276660431285445650
 Rigidbody2D:
@@ -113,7 +114,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 10
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 0
@@ -165,8 +166,8 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0.3}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 1, y: 1.609375}
+    pivot: {x: 0.5, y: 0.125}
+    oldSize: {x: 2, y: 2}
     newSize: {x: 1.06, y: 2.76}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -187,6 +188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   moveSpeed: 5
+  knockbackDuration: 0.15
 --- !u!95 &4538694701449065697
 Animator:
   serializedVersion: 7
@@ -264,6 +266,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game::Health
   maxHealth: 100
+--- !u!114 &3421652555131118020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904111813152331484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f45efa0c18e9d14fbc9ab123ad600d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::DamageFlash
+  flashColor: {r: 1, g: 0, b: 0, a: 1}
+  flashDuration: 0.1
 --- !u!1001 &2437727462962264434
 PrefabInstance:
   m_ObjectHideFlags: 0
