@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour
         rb.linearVelocity = Vector2.zero;
         rb.bodyType = RigidbodyType2D.Kinematic;  // påverkas inte längre av knuffar
         GetComponent<Collider2D>().enabled = false;
+        GetComponent<Weapon>().enabled = false;
+        animator.SetTrigger("Die");
         enabled = false;
         GameEvents.PlayerDied();
     }
