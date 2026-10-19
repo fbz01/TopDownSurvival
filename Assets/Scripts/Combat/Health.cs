@@ -9,6 +9,8 @@ public class Health : MonoBehaviour, IDamageable
     public int Max => maxHealth;
 
     public event Action<int, int> OnHealthChanged; // event att lyssna på <nuvarande health, max health>
+    public event Action<int> OnDamaged;
+
     public event Action OnDied;
     // metod för testerna
     private void Awake()
@@ -28,6 +30,7 @@ public class Health : MonoBehaviour, IDamageable
         if (Current <= 0) return;
 
         Current = Mathf.Max(Current - amount, 0);
+        OnDamaged?.Invoke(amount);
         OnHealthChanged?.Invoke(Current, maxHealth);
 
         if (Current == 0)

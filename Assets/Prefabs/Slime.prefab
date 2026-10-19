@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8412033281673653879}
   - component: {fileID: -5397827050999167087}
   - component: {fileID: -4021479949660470640}
+  - component: {fileID: 5069829508903190469}
   m_Layer: 0
   m_Name: Slime
   m_TagString: Untagged
@@ -224,6 +225,20 @@ MonoBehaviour:
   scoreValue: 10
   deathDuration: 0.5
   hurtDuration: 0.2
+--- !u!114 &5069829508903190469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4767175782690883853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e01e59748bb85d4480e384629879625, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::DamagePopupSpawner
+  popupPrefab: {fileID: 4873665682115321372, guid: 2c3f21dfcd1201f449025bf1da5d3765, type: 3}
+  offset: {x: 0, y: 0.8, z: 0}
 --- !u!1001 &8673971447062832833
 PrefabInstance:
   m_ObjectHideFlags: 0
