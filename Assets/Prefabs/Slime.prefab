@@ -97,7 +97,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
   m_BlendShapeWeights: []
 --- !u!61 &7272357194649786496
 BoxCollider2D:
@@ -225,6 +225,8 @@ MonoBehaviour:
   scoreValue: 10
   deathDuration: 0.5
   hurtDuration: 0.2
+  contactKnockback: 8
+  recoilForce: 3
 --- !u!114 &5069829508903190469
 MonoBehaviour:
   m_ObjectHideFlags: 0
