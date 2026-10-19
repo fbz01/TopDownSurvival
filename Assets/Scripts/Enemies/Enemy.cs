@@ -96,7 +96,7 @@ public class Enemy : MonoBehaviour, IKnockable
         GetComponent<Collider2D>().enabled = false; // inga fler träffar eller knuffar
 
         animator.SetTrigger("Die");
-        //GameEvents.EnemyKilled(this);
+        GameEvents.EnemyKilled(this);
 
         Destroy(gameObject, deathDuration); // ta bort när animationen har spelats
     }

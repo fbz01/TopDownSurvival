@@ -6,6 +6,7 @@ public class Health : MonoBehaviour, IDamageable
 
     [SerializeField] private int maxHealth = 100;
     public int Current { get; private set; }
+    public int Max => maxHealth;
 
     public event Action<int, int> OnHealthChanged; // event att lyssna på <nuvarande health, max health>
     public event Action OnDied;
