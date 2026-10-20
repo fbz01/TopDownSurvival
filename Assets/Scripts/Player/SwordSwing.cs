@@ -5,6 +5,8 @@ public class SwordSwing : MonoBehaviour
 {
     [SerializeField] private GameObject slashEffectPrefab;
     [SerializeField] private float slashLifetime = 0.3f;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private float pitchVariation = 0.1f;
 
     private Weapon weapon;
     private Animator animator;
@@ -47,6 +49,7 @@ public class SwordSwing : MonoBehaviour
     {
         animator.SetTrigger("Attack");
         SpawnSlashEffect(direction);
+        PlayAttackSound();
     }
 
     private void SpawnSlashEffect(Vector2 direction)
@@ -61,5 +64,14 @@ public class SwordSwing : MonoBehaviour
         GameObject slash = Instantiate(prefab, weapon.GetHitCenter(),
                                        Quaternion.Euler(0f, 0f, angle));
         Destroy(slash, slashLifetime);
+    }
+
+    private void PlayAttackSound()
+    {
+        AudioClip clip = weapon.CurrentWeapon.AttackSound;
+        if (clip == null || audioSource == null) return;
+
+        audioSource.pitch = 1f + Random.Range(-pitchVariation, pitchVariation);
+        audioSource.PlayOneShot(clip);
     }
 }

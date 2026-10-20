@@ -21,3 +21,4 @@ MonoBehaviour:
   knockbackForce: 8
   animatorOverride: {fileID: 0}
   effectPrefab: {fileID: 0}
+  attackSound: {fileID: 8300000, guid: 86463a4c73281374cacbe73b01285b2b, type: 3}
