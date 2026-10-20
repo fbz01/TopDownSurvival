@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &1204375177837733882
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -5397827050999167087, guid: 6671fe572dac3c5469448bea21513811, type: 3}
+      propertyPath: maxHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: -4021479949660470640, guid: 6671fe572dac3c5469448bea21513811, type: 3}
+      propertyPath: moveSpeed
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -4021479949660470640, guid: 6671fe572dac3c5469448bea21513811, type: 3}
+      propertyPath: scoreValue
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: -4021479949660470640, guid: 6671fe572dac3c5469448bea21513811, type: 3}
+      propertyPath: contactDamage
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: -4021479949660470640, guid: 6671fe572dac3c5469448bea21513811, type: 3}
+      propertyPath: contactKnockback
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4668585999882179721, guid: 6671fe572dac3c5469448bea21513811, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4668585999882179721, guid: 6671fe572dac3c5469448bea21513811, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4668585999882179721, guid: 6671fe572dac3c5469448bea21513811, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4668585999882179721, guid: 6671fe572dac3c5469448bea21513811, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4668585999882179721, guid: 6671fe572dac3c5469448bea21513811, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4668585999882179721, guid: 6671fe572dac3c5469448bea21513811, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4668585999882179721, guid: 6671fe572dac3c5469448bea21513811, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4668585999882179721, guid: 6671fe572dac3c5469448bea21513811, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4668585999882179721, guid: 6671fe572dac3c5469448bea21513811, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4668585999882179721, guid: 6671fe572dac3c5469448bea21513811, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4767175782690883853, guid: 6671fe572dac3c5469448bea21513811, type: 3}
+      propertyPath: m_Name
+      value: Slime_Red
+      objectReference: {fileID: 0}
+    - target: {fileID: 5744126779252846277, guid: 6671fe572dac3c5469448bea21513811, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 2130505546754964406, guid: 4c6b78494439b6244986c84df2fffc4c, type: 3}
+    - target: {fileID: 9067825941289915997, guid: 6671fe572dac3c5469448bea21513811, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: da77c074a09ac7c4ebcd9afc5f874075, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6671fe572dac3c5469448bea21513811, type: 3}
