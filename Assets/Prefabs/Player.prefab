@@ -224,8 +224,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c10c01e4e1e95242b3b12ca0f24ac82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::PlayerStats
+  strength: 5
   bonusDamage: 0
+  critChance: 50
+  critMultiplier: 2
   attackSpeedMultiplier: 1
+  maxAttackSpeedMultiplier: 3
 --- !u!114 &1314943436973754794
 MonoBehaviour:
   m_ObjectHideFlags: 0
