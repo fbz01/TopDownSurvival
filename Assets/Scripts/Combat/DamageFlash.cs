@@ -30,7 +30,7 @@ public class DamageFlash : MonoBehaviour
         spriteRenderer.color = originalColor;
     }
 
-    private void HandleDamaged(int amount)
+    private void HandleDamaged(int amount, bool isCrit)
     {
         if (flashRoutine != null)
             StopCoroutine(flashRoutine);
