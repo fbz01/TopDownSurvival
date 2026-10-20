@@ -13,7 +13,7 @@ public class Weapon : MonoBehaviour
     private float nextAttackTime;
 
     public WeaponData CurrentWeapon => currentWeapon;
-    public int Damage => currentWeapon.BaseDamage + stats.BonusDamage;
+    public int Damage => currentWeapon.BaseDamage + stats.BonusDamage + stats.Strength;
     public float AttackCooldown =>
         1f / (currentWeapon.AttacksPerSecond * stats.AttackSpeedMultiplier);
 
@@ -44,18 +44,22 @@ public class Weapon : MonoBehaviour
         OnWeaponChanged?.Invoke(newWeapon);
     }
 
-    private int CalculateDamage()
+    private int CalculateDamage(out bool isCrit)
     {
-        int damage = currentWeapon.BaseDamage + stats.BonusDamage + stats.strength;
+        int damage = currentWeapon.BaseDamage + stats.BonusDamage + stats.Strength;
 
-        if (UnityEngine.Random.Range(0, 100) < stats.luck)
-            damage *= 2;
+        isCrit = stats.RollCrit();
+        if (isCrit)
+            damage = Mathf.RoundToInt(damage * stats.CritMultiplier);
+
         return damage;
     }
 
     private void Attack()
     {
         nextAttackTime = Time.time + AttackCooldown;
+
+        int damage = CalculateDamage(out bool isCrit);
 
         Collider2D[] hits = Physics2D.OverlapCircleAll(GetHitCenter(), currentWeapon.Radius);
         foreach (Collider2D hit in hits)
@@ -64,7 +68,7 @@ public class Weapon : MonoBehaviour
 
             if (hit.TryGetComponent(out IDamageable target))
             {
-                target.TakeDamage(Damage); // eller er CalculateDamage()
+                target.TakeDamage(damage, isCrit);
 
                 if (hit.TryGetComponent(out IKnockable knockbackable))
                 {
