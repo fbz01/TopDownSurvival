@@ -13,6 +13,7 @@ public class WeaponData : ScriptableObject
     [SerializeField] private float knockbackForce = 6f;
     [SerializeField] private AnimatorOverrideController animatorOverride;
     [SerializeField] private GameObject effectPrefab;
+    [SerializeField] private AudioClip attackSound;
 
     public string DisplayName => displayName;
     public Sprite Icon => icon;
@@ -23,4 +24,5 @@ public class WeaponData : ScriptableObject
     public float KnockbackForce => knockbackForce;
     public AnimatorOverrideController AnimatorOverride => animatorOverride;
     public GameObject EffectPrefab => effectPrefab;
+    public AudioClip AttackSound => attackSound;
 }
