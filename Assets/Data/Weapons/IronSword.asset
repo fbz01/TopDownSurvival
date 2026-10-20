@@ -16,6 +16,8 @@ MonoBehaviour:
   icon: {fileID: 0}
   baseDamage: 10
   attacksPerSecond: 2
-  range: 0.5
+  range: 0.8
   radius: 0.5
   knockbackForce: 8
+  animatorOverride: {fileID: 0}
+  effectPrefab: {fileID: 0}
