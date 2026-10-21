@@ -1,12 +1,14 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 [RequireComponent(typeof(PlayerController), typeof(PlayerStats))]
 public class Weapon : MonoBehaviour
 {
     [SerializeField] private WeaponData currentWeapon;
     [SerializeField] private Vector2 bodyOffset = new Vector2(0f, 05f);
+    [SerializeField] private Vector2 projectileOffset = new Vector2(0f, 0.3f);
 
     private PlayerController controller;
     private PlayerStats stats;
@@ -58,9 +60,18 @@ public class Weapon : MonoBehaviour
     private void Attack()
     {
         nextAttackTime = Time.time + AttackCooldown;
-
         int damage = CalculateDamage(out bool isCrit);
 
+        if (currentWeapon.IsRanged)
+            StartCoroutine(FireProjectile(damage, isCrit, controller.FacingDirection));
+        else
+            MeleeHit(damage, isCrit);
+
+        OnAttack?.Invoke(controller.FacingDirection);
+    }
+
+    private void MeleeHit(int damage, bool isCrit)
+    {
         Collider2D[] hits = Physics2D.OverlapCircleAll(GetHitCenter(), currentWeapon.Radius);
         foreach (Collider2D hit in hits)
         {
@@ -77,7 +88,16 @@ public class Weapon : MonoBehaviour
                 }
             }
         }
-        OnAttack?.Invoke(controller.FacingDirection);
+    }
+
+    private IEnumerator FireProjectile(int damage, bool isCrit, Vector2 direction)
+    {
+        yield return new WaitForSeconds(currentWeapon.ReleaseDelay);
+
+        Vector2 spawnPos = (Vector2)transform.position + projectileOffset + direction * 0.3f;
+        Projectile arrow = Instantiate(currentWeapon.ProjectilePrefab, spawnPos, Quaternion.identity);
+        arrow.Launch(direction, currentWeapon.ProjectileSpeed, damage, isCrit,
+                     currentWeapon.KnockbackForce, gameObject);
     }
 
     public Vector2 GetHitCenter()
