@@ -92,12 +92,14 @@ public class Weapon : MonoBehaviour
 
     private IEnumerator FireProjectile(int damage, bool isCrit, Vector2 direction)
     {
-        yield return new WaitForSeconds(currentWeapon.ReleaseDelay);
+        WeaponData firedWith = currentWeapon;
+
+        yield return new WaitForSeconds(firedWith.ReleaseDelay);
 
         Vector2 spawnPos = (Vector2)transform.position + projectileOffset + direction * 0.3f;
-        Projectile arrow = Instantiate(currentWeapon.ProjectilePrefab, spawnPos, Quaternion.identity);
-        arrow.Launch(direction, currentWeapon.ProjectileSpeed, damage, isCrit,
-                     currentWeapon.KnockbackForce, gameObject);
+        Projectile arrow = Instantiate(firedWith.ProjectilePrefab, spawnPos, Quaternion.identity);
+        arrow.Launch(direction, firedWith.ProjectileSpeed, damage, isCrit,
+                     firedWith.KnockbackForce, gameObject);
     }
 
     public Vector2 GetHitCenter()

@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 3421652555131118020}
   - component: {fileID: -1981874820762037575}
   - component: {fileID: 2343983218908565141}
+  - component: {fileID: 4536521826251778841}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -245,6 +246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Game::Weapon
   currentWeapon: {fileID: 11400000, guid: 90f8182d18d30ea4d91b8b8d6d08c715, type: 2}
   bodyOffset: {x: 0, y: 0.6}
+  projectileOffset: {x: 0, y: 0.3}
 --- !u!114 &4447546102870922375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -399,6 +401,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4536521826251778841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904111813152331484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d03e8ef4f2340f34480aea8913bc954f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::WeaponSwitcher
+  weapons:
+  - {fileID: 11400000, guid: ed5480264c8548945836b8cec8c83d5c, type: 2}
+  - {fileID: 11400000, guid: 90f8182d18d30ea4d91b8b8d6d08c715, type: 2}
+  - {fileID: 11400000, guid: 337ebdebe33602a4793b00edb20361b8, type: 2}
 --- !u!1001 &2437727462962264434
 PrefabInstance:
   m_ObjectHideFlags: 0
