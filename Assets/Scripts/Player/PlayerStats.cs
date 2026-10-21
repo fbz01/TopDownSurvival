@@ -24,6 +24,11 @@ public class PlayerStats : MonoBehaviour
     public float CritMultiplier => critMultiplier;
     public float AttackSpeedMultiplier => attackSpeedMultiplier;
 
+    private void Start()
+    {
+        LoadSavedStats();
+    }
+
     // Gubben avgör om slaget blir en crit. Ett vapen kan ge extra chans.
     public bool RollCrit(int bonusChance = 0)
     {
@@ -63,6 +68,18 @@ public class PlayerStats : MonoBehaviour
     {
         if (amount <= 0) return;
         attackSpeedMultiplier = Mathf.Min(attackSpeedMultiplier + amount, maxAttackSpeedMultiplier);
+        OnStatsChanged?.Invoke();
+    }
+
+    public void LoadSavedStats()
+    {
+        var savedStats = PlayerStatsManager.Instance;
+        if (savedStats == null) return;
+
+        strength = savedStats.Strength;
+        critChance = savedStats.CritChance;
+        attackSpeedMultiplier = Mathf.Min(savedStats.AttackSpeedMultiplier, maxAttackSpeedMultiplier);
+
         OnStatsChanged?.Invoke();
     }
 }
