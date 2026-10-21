@@ -11,9 +11,11 @@ public class Enemy : MonoBehaviour, IKnockable
     [SerializeField] private float hurtDuration = 0.2f;
     [SerializeField] private float contactKnockback = 8f;
     [SerializeField] private float recoilForce = 3f;
+    [SerializeField] private float knockbackMultiplier = 1f;
 
     public int ScoreValue => scoreValue;
     public bool IsDead { get; private set; }
+    public bool IsBusy { get; set; }
 
     private Rigidbody2D rb;
     private Health health;
@@ -48,9 +50,11 @@ public class Enemy : MonoBehaviour, IKnockable
             return;
         }
 
+        if (IsBusy) return;
+
         if (IsStunned)
         {
-            rb.linearVelocity *= 0.85f; // bromsa in knuffen mjukt
+            rb.linearVelocity *= 0.85f;
             return;
         }
 
@@ -61,7 +65,7 @@ public class Enemy : MonoBehaviour, IKnockable
 
     private void Update()
     {
-        if (IsDead || IsStunned) return;
+        if (IsDead || IsStunned || IsBusy) return;
 
         Vector2 velocity = rb.linearVelocity;
         animator.SetBool("IsMoving", velocity.sqrMagnitude > 0.01f);
@@ -72,7 +76,7 @@ public class Enemy : MonoBehaviour, IKnockable
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (IsDead || IsStunned || Time.time < nextDamageTime) return;
+        if (IsDead || IsStunned || IsBusy || Time.time < nextDamageTime) return;
         if (!collision.gameObject.CompareTag("Player")) return;
 
         if (collision.gameObject.TryGetComponent(out IDamageable target))
@@ -92,9 +96,8 @@ public class Enemy : MonoBehaviour, IKnockable
 
     public void ApplyKnockback(Vector2 direction, float force)
     {
-        if (IsDead) return;
-
-        rb.linearVelocity = direction * force;
+        if (IsDead || IsBusy) return;
+        rb.linearVelocity = direction * force * knockbackMultiplier;
         stunnedUntil = Time.time + hurtDuration;
         animator.SetTrigger("Hurt");
     }
