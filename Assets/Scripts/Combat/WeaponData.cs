@@ -14,6 +14,14 @@ public class WeaponData : ScriptableObject
     [SerializeField] private AnimatorOverrideController animatorOverride;
     [SerializeField] private GameObject effectPrefab;
     [SerializeField] private AudioClip attackSound;
+    [SerializeField] private Projectile projectilePrefab;
+    [SerializeField] private float projectileSpeed = 12f;
+    [SerializeField] private float releaseDelay = 0.17f;
+    
+    public Projectile ProjectilePrefab => projectilePrefab;
+    public float ProjectileSpeed => projectileSpeed;
+    public float ReleaseDelay => releaseDelay;
+    public bool IsRanged => projectilePrefab != null;
 
     public string DisplayName => displayName;
     public Sprite Icon => icon;

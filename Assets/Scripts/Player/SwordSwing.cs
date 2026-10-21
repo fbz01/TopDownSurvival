@@ -54,10 +54,7 @@ public class SwordSwing : MonoBehaviour
 
     private void SpawnSlashEffect(Vector2 direction)
     {
-        GameObject prefab = weapon.CurrentWeapon.EffectPrefab != null
-            ? weapon.CurrentWeapon.EffectPrefab
-            : slashEffectPrefab;
-
+        GameObject prefab = weapon.CurrentWeapon.EffectPrefab;
         if (prefab == null) return;
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
