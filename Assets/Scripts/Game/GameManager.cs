@@ -32,13 +32,11 @@ public class GameManager : MonoBehaviour
 
     private void HandleWaveStarted(int wave)
     {
-        Wave += wave;
-        GameEvents.WaveStarted(Wave);
+        Wave = wave;
     }
 
     private void HandleGameStateChanged(GameState state)
     {
-        State = state;
-        GameEvents.GameStateChanged(State);
+       State = state;
     }
 }
