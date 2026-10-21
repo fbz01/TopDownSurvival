@@ -537,22 +537,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 574961495}
-    - target: {fileID: 3635230833075137815, guid: b233d05329d9673489b9aaa7980f3423, type: 3}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3635230833075137815, guid: b233d05329d9673489b9aaa7980f3423, type: 3}
-      propertyPath: m_Color.b
-      value: 0.8627452
-      objectReference: {fileID: 0}
-    - target: {fileID: 3635230833075137815, guid: b233d05329d9673489b9aaa7980f3423, type: 3}
-      propertyPath: m_Color.g
-      value: 0.8627452
-      objectReference: {fileID: 0}
-    - target: {fileID: 3635230833075137815, guid: b233d05329d9673489b9aaa7980f3423, type: 3}
-      propertyPath: m_Color.r
-      value: 0.8627452
-      objectReference: {fileID: 0}
     - target: {fileID: 6452303640504359852, guid: b233d05329d9673489b9aaa7980f3423, type: 3}
       propertyPath: m_fontColor.a
       value: 1
@@ -640,18 +624,6 @@ PrefabInstance:
     - target: {fileID: 6524021823656408509, guid: b233d05329d9673489b9aaa7980f3423, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7099549724481385653, guid: b233d05329d9673489b9aaa7980f3423, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 480
-      objectReference: {fileID: 0}
-    - target: {fileID: 7099549724481385653, guid: b233d05329d9673489b9aaa7980f3423, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 7099549724481385653, guid: b233d05329d9673489b9aaa7980f3423, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -135
       objectReference: {fileID: 0}
     - target: {fileID: 9067508264026923327, guid: b233d05329d9673489b9aaa7980f3423, type: 3}
       propertyPath: m_Name
