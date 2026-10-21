@@ -753,7 +753,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Choose upgrade
+  m_text: Choose upgrades
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c95d787ad00f2d849941a4688f1d5301, type: 2}
   m_sharedMaterial: {fileID: 5081933148535312558, guid: c95d787ad00f2d849941a4688f1d5301, type: 2}
