@@ -25,7 +25,7 @@ RenderSettings:
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 3
-  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+  m_SubtractiveShadowColor: {r: 0, g: 0, b: 0, a: 1}
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -537,6 +537,30 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 574961495}
+    - target: {fileID: 3635230833075137815, guid: b233d05329d9673489b9aaa7980f3423, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3635230833075137815, guid: b233d05329d9673489b9aaa7980f3423, type: 3}
+      propertyPath: m_Color.b
+      value: 0.8627452
+      objectReference: {fileID: 0}
+    - target: {fileID: 3635230833075137815, guid: b233d05329d9673489b9aaa7980f3423, type: 3}
+      propertyPath: m_Color.g
+      value: 0.8627452
+      objectReference: {fileID: 0}
+    - target: {fileID: 3635230833075137815, guid: b233d05329d9673489b9aaa7980f3423, type: 3}
+      propertyPath: m_Color.r
+      value: 0.8627452
+      objectReference: {fileID: 0}
+    - target: {fileID: 6452303640504359852, guid: b233d05329d9673489b9aaa7980f3423, type: 3}
+      propertyPath: m_fontColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6452303640504359852, guid: b233d05329d9673489b9aaa7980f3423, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4281479730
+      objectReference: {fileID: 0}
     - target: {fileID: 6524021823656408509, guid: b233d05329d9673489b9aaa7980f3423, type: 3}
       propertyPath: m_Pivot.x
       value: 0
