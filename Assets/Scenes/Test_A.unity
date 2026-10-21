@@ -7075,63 +7075,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!1001 &987361344
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1765688792125351828, guid: b912e7a14f73cb4478905359260e2003, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.9880143
-      objectReference: {fileID: 0}
-    - target: {fileID: 1765688792125351828, guid: b912e7a14f73cb4478905359260e2003, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -2.363168
-      objectReference: {fileID: 0}
-    - target: {fileID: 1765688792125351828, guid: b912e7a14f73cb4478905359260e2003, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1765688792125351828, guid: b912e7a14f73cb4478905359260e2003, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1765688792125351828, guid: b912e7a14f73cb4478905359260e2003, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1765688792125351828, guid: b912e7a14f73cb4478905359260e2003, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1765688792125351828, guid: b912e7a14f73cb4478905359260e2003, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1765688792125351828, guid: b912e7a14f73cb4478905359260e2003, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1765688792125351828, guid: b912e7a14f73cb4478905359260e2003, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1765688792125351828, guid: b912e7a14f73cb4478905359260e2003, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1901279627200002576, guid: b912e7a14f73cb4478905359260e2003, type: 3}
-      propertyPath: m_Name
-      value: Slime_Boss
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: b912e7a14f73cb4478905359260e2003, type: 3}
 --- !u!1 &1505483270
 GameObject:
   m_ObjectHideFlags: 0
@@ -7406,6 +7349,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1938492147}
   - component: {fileID: 1938492146}
+  - component: {fileID: 1938492148}
   m_Layer: 0
   m_Name: EnemySpawner
   m_TagString: Untagged
@@ -7425,13 +7369,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba0be56ec510d514fb922df887b302b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::EnemySpawner
-  enemyPrefab: {fileID: -4021479949660470640, guid: 6671fe572dac3c5469448bea21513811, type: 3}
   arenaSize: {x: 14, y: 8}
   minDistanceToPlayer: 3
-  startInterval: 3
-  minInterval: 0.5
-  intervalDecreasePerSpawn: 0.05
-  maxEnemies: 20
 --- !u!4 &1938492147
 Transform:
   m_ObjectHideFlags: 0
@@ -7447,6 +7386,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1938492148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1938492145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a001fc2a9855a7545bb355e52819249e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::WaveManager
+  waves:
+  - {fileID: 11400000, guid: 4cb7d8be6a829da4291719af320c0f37, type: 2}
+  - {fileID: 11400000, guid: 044b8f63cd871da4e9241c0a60be3efd, type: 2}
+  - {fileID: 11400000, guid: 765e523db42c6e5499f760078354a962, type: 2}
+  - {fileID: 11400000, guid: cdc184e156580e547a827446e9a123b0, type: 2}
+  - {fileID: 11400000, guid: f81ea7c87a8ebaf409931c376b62a3d7, type: 2}
+  spawner: {fileID: 1938492146}
+  firstWaveDelay: 2
+  pauseBetweenWaves: 3
 --- !u!1 &2068284640
 GameObject:
   m_ObjectHideFlags: 0
@@ -7695,4 +7655,3 @@ SceneRoots:
   - {fileID: 1725542129}
   - {fileID: 85791614}
   - {fileID: 414783788}
-  - {fileID: 987361344}
