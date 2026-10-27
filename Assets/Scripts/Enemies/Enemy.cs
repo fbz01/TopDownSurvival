@@ -12,6 +12,8 @@ public class Enemy : MonoBehaviour, IKnockable
     [SerializeField] private float contactKnockback = 8f;
     [SerializeField] private float recoilForce = 3f;
     [SerializeField] private float knockbackMultiplier = 1f;
+    [SerializeField] private AudioClip deathSound;
+    [SerializeField, Range(0f, 1f)] private float deathVolume = 0.6f;
 
     public int ScoreValue => scoreValue;
     public bool IsDead { get; private set; }
@@ -109,6 +111,8 @@ public class Enemy : MonoBehaviour, IKnockable
         GetComponent<Collider2D>().enabled = false; // inga fler träffar eller knuffar
 
         animator.SetTrigger("Die");
+        if (deathSound != null)
+            AudioSource.PlayClipAtPoint(deathSound, Camera.main.transform.position, deathVolume);
         GameEvents.EnemyKilled(this);
 
         Destroy(gameObject, deathDuration); // ta bort när animationen har spelats

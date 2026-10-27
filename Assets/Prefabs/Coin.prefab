@@ -147,6 +147,8 @@ MonoBehaviour:
   magnetSpeed: 8
   lifetime: 15
   blinkTime: 3
+  pickupSound: {fileID: 8300000, guid: 71c63d23013e92d4f9d17215b2760302, type: 3}
+  pickupVolume: 1
 --- !u!95 &3189239286604579684
 Animator:
   serializedVersion: 7

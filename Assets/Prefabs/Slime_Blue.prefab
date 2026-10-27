@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5397827050999167087, guid: 6671fe572dac3c5469448bea21513811, type: 3}
       propertyPath: maxHealth
-      value: 20
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: -4021479949660470640, guid: 6671fe572dac3c5469448bea21513811, type: 3}
       propertyPath: moveSpeed
@@ -23,6 +23,14 @@ PrefabInstance:
     - target: {fileID: -4021479949660470640, guid: 6671fe572dac3c5469448bea21513811, type: 3}
       propertyPath: contactDamage
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4668585999882179721, guid: 6671fe572dac3c5469448bea21513811, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4668585999882179721, guid: 6671fe572dac3c5469448bea21513811, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 4668585999882179721, guid: 6671fe572dac3c5469448bea21513811, type: 3}
       propertyPath: m_LocalPosition.x

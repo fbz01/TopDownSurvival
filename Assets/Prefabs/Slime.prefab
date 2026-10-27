@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab14165992bc77b4a8f63f61f7975dbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Health
-  maxHealth: 30
+  maxHealth: 100
 --- !u!114 &-4021479949660470640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,6 +229,8 @@ MonoBehaviour:
   contactKnockback: 8
   recoilForce: 3
   knockbackMultiplier: 1
+  deathSound: {fileID: 8300000, guid: 3cf97ea5f13393e41afcdf93d06495ed, type: 3}
+  deathVolume: 0.6
 --- !u!114 &5069829508903190469
 MonoBehaviour:
   m_ObjectHideFlags: 0

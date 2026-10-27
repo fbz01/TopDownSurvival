@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour, IKnockable
     private Health health;
     private float knockedUntil;
     private bool IsKnockedBack => Time.time < knockedUntil;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip deathSound;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -33,6 +36,11 @@ public class PlayerController : MonoBehaviour, IKnockable
         GetComponent<Collider2D>().enabled = false;
         GetComponent<Weapon>().enabled = false;
         animator.SetTrigger("Die");
+        if (audioSource != null && deathSound != null)
+        {
+            audioSource.pitch = 1f;            // återställ tonhöjden från svärdsljuden
+            audioSource.PlayOneShot(deathSound);
+        }
         enabled = false;
         GameEvents.PlayerDied();
     }

@@ -2,10 +2,12 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-    [SerializeField] private float magnetRange = 1.5f; 
+    [SerializeField] private float magnetRange = 1.5f;
     [SerializeField] private float magnetSpeed = 8f;
-    [SerializeField] private float lifetime = 15f; 
+    [SerializeField] private float lifetime = 15f;
     [SerializeField] private float blinkTime = 3f;
+    [SerializeField] private AudioClip pickupSound;
+    [SerializeField, Range(0f, 1f)] private float pickupVolume = 0.7f;
 
     private int value;
     private Transform player;
@@ -47,6 +49,9 @@ public class Coin : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Player")) return;
+
+        if (pickupSound != null)
+            AudioSource.PlayClipAtPoint(pickupSound, Camera.main.transform.position, pickupVolume);
 
         GameEvents.CoinCollected(value);
         Destroy(gameObject);
