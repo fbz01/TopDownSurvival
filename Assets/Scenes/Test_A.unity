@@ -229,6 +229,7 @@ GameObject:
   - component: {fileID: 1505483271}
   - component: {fileID: 1505483274}
   - component: {fileID: 1505483275}
+  - component: {fileID: 1505483276}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -366,6 +367,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3de70cb808b9004cb99dd728f799a77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::CameraMover
+--- !u!114 &1505483276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505483270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ca5976b19c091044b2b9facbabb625e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::CameraZoom
+  referenceHeight: 720
+  referenceSize: 4.2
+  maxSize: 7
 --- !u!1 &1725542126
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,7 +548,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba0be56ec510d514fb922df887b302b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::EnemySpawner
-  arenaSize: {x: 15, y: 9}
+  arenaSize: {x: 14, y: 8}
   minDistanceToPlayer: 3
 --- !u!4 &1938492147
 Transform:

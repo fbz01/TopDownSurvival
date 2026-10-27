@@ -28,6 +28,10 @@ PrefabInstance:
       propertyPath: knockbackMultiplier
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 4031114976042246839, guid: 6671fe572dac3c5469448bea21513811, type: 3}
+      propertyPath: coinCount
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4668585999882179721, guid: 6671fe572dac3c5469448bea21513811, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

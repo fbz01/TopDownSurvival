@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 
     private void OnEnable()
     {
-        GameEvents.OnEnemyKilled += HandleEnemyKilled;
+        GameEvents.OnCoinCollected += HandleCoinCollected;
 
         GameEvents.OnWaveStarted += HandleWaveStarted;
 
@@ -17,16 +17,16 @@ public class GameManager : MonoBehaviour
 
     private void OnDisable()
     {
-        GameEvents.OnEnemyKilled -= HandleEnemyKilled;
+        GameEvents.OnCoinCollected -= HandleCoinCollected;
 
         GameEvents.OnWaveStarted -= HandleWaveStarted;
 
         GameEvents.OnGameStateChanged -= HandleGameStateChanged;
     }
 
-    private void HandleEnemyKilled(Enemy enemy)
+    private void HandleCoinCollected(int value)
     {
-        Score += enemy.ScoreValue;
+        Score += value;
         GameEvents.ScoreChanged(Score);
     }
 
@@ -37,6 +37,6 @@ public class GameManager : MonoBehaviour
 
     private void HandleGameStateChanged(GameState state)
     {
-       State = state;
+        State = state;
     }
 }

@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Game::WeaponData
   displayName: Greatsword
   icon: {fileID: 21300000, guid: 9e405741a917ea0478bb6c597c238d71, type: 3}
-  baseDamage: 25
+  baseDamage: 10
   attacksPerSecond: 0.8
   range: 0
-  radius: 1.5
-  knockbackForce: 10
+  radius: 2
+  knockbackForce: 15
   animatorOverride: {fileID: 22100000, guid: 2eec709f598025a4d95e8433af874a9a, type: 2}
   effectPrefab: {fileID: 2001118695858072744, guid: 18bc2566ca186b743a2c5934f55f5dcf, type: 3}
   attackSound: {fileID: 8300000, guid: 31a2df597a734374d8a85069f0a9668f, type: 3}

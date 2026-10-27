@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Game::WeaponData
   displayName: Bow
   icon: {fileID: 21300000, guid: 3bc911b6eb31b864fad2130142915c3c, type: 3}
-  baseDamage: 8
+  baseDamage: 15
   attacksPerSecond: 2
   range: 0
   radius: 0

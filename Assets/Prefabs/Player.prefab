@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: -1981874820762037575}
   - component: {fileID: 2343983218908565141}
   - component: {fileID: 4536521826251778841}
+  - component: {fileID: -9129863333892744614}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -192,6 +193,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   moveSpeed: 5
   knockbackDuration: 0.15
+  audioSource: {fileID: 2343983218908565141}
+  deathSound: {fileID: 8300000, guid: 05adcaf39b354904fb6ff00393555160, type: 3}
 --- !u!95 &4538694701449065697
 Animator:
   serializedVersion: 7
@@ -303,7 +306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game::HealthPotion
   healAmount: 30
-  cooldown: 10
+  cooldown: 5
 --- !u!82 &2343983218908565141
 AudioSource:
   m_ObjectHideFlags: 0
@@ -417,6 +420,22 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ed5480264c8548945836b8cec8c83d5c, type: 2}
   - {fileID: 11400000, guid: 90f8182d18d30ea4d91b8b8d6d08c715, type: 2}
   - {fileID: 11400000, guid: 337ebdebe33602a4793b00edb20361b8, type: 2}
+--- !u!114 &-9129863333892744614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904111813152331484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd45d5ee64802bd45ac51ecd31e6e1d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::DamageSound
+  audioSource: {fileID: 2343983218908565141}
+  hurtSound: {fileID: 8300000, guid: 50b3369e33bc06b41bd8944329513892, type: 3}
+  volume: 0.8
+  pitchVariation: 0.1
 --- !u!1001 &2437727462962264434
 PrefabInstance:
   m_ObjectHideFlags: 0
