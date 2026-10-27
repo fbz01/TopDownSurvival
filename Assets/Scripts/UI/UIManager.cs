@@ -27,6 +27,11 @@ public class UIManager : MonoBehaviour
         GameEvents.OnGameStateChanged -= HandleGameStateChanged;
     }
 
+    private void Start()
+    {
+        ConfigureSystemSettings(GameState.Menu);
+    }
+
     /// <summary>
     /// The event handler that responds whenever the GameEvents publisher fires an update
     /// </summary>
@@ -101,7 +106,7 @@ public class UIManager : MonoBehaviour
 
         // 4. Scene loading finished! Configure the new structural states, timelines, and panels
         ConfigureSystemSettings(targetState);
-        
+
         // 5. Hide the loading overlay cleanly
         loadingScreenPanel.SetActive(false);
     }
@@ -158,5 +163,15 @@ public class UIManager : MonoBehaviour
         if (pauseMenuPanel != null) pauseMenuPanel.SetActive(pause);
         if (upgradeMenuPanel != null) upgradeMenuPanel.SetActive(upgrade);
         if (gameOverPanel != null) gameOverPanel.SetActive(over);
+    }
+
+    public void ResumeGame()
+    {
+        GameEvents.GameStateChanged(GameState.Playing);
+    }
+
+    public void QuitGame()
+    {
+        GameEvents.GameStateChanged(GameState.Menu);
     }
 }
