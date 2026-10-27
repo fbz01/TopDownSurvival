@@ -6,7 +6,6 @@ public class UpgradeManager : MonoBehaviour
 {
     [Header("UI")]
     [SerializeField] private TextMeshProUGUI resultText;
-    [SerializeField] private string gameSceneName = "Test_A";
 
     [Header("Upgrade Amounts")]
     [SerializeField] private int strengthUpgrade = 5;
@@ -88,6 +87,6 @@ public class UpgradeManager : MonoBehaviour
 
         stats.SetStats(newStrength, newCritChance, newAttackSpeed);
 
-        SceneManager.LoadScene(gameSceneName);
+        GameEvents.GameStateChanged(GameState.Playing);
     }
 }

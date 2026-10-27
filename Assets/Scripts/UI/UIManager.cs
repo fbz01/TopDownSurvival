@@ -5,13 +5,6 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    // Singleton instance for global access point
-    public static UIManager Instance { get; private set; }
-
-    [Header("Core State Tracking")]
-    [SerializeField] private GameState currentState;
-    public GameState CurrentState => currentState;
-
     [Header("Loading Subsystem")]
     [SerializeField] private GameObject loadingScreenPanel;
     [SerializeField] private Slider loadingProgressBar;
@@ -22,41 +15,62 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject upgradeMenuPanel;
     [SerializeField] private GameObject gameOverPanel;
 
-    private void Awake()
+    private void OnEnable()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        // 1. Subscribe to the global game event system (Observer Pattern)
+        GameEvents.OnGameStateChanged += HandleGameStateChanged;
     }
 
-    private void Start()
+    private void OnDisable()
     {
-        // Set up the initial visual layout for the Main Menu
-        ConfigureSystemSettingsForState(GameState.Menu);
+        // 2. IMPORTANT: Unsubscribe to prevent memory leaks if the UI is destroyed
+        GameEvents.OnGameStateChanged -= HandleGameStateChanged;
     }
 
     /// <summary>
-    /// The primary Facade method. Call this whenever you want to change state or shift scenes.
+    /// The event handler that responds whenever the GameEvents publisher fires an update
     /// </summary>
-    public void ChangeState(GameState newState, string sceneToLoad = "")
+    private void HandleGameStateChanged(GameState newState)
     {
-        currentState = newState;
-
-        // Condition: If a scene name is provided, execute the async scene migration process first.
-        if (!string.IsNullOrEmpty(sceneToLoad))
+        // Route settings immediately based on the state choice
+        switch (newState)
         {
-            StartCoroutine(LoadSceneAndTransitionStateAsync(sceneToLoad, newState));
+            case GameState.Menu:
+                EvaluateSceneTransition("StartScene", newState);
+                break;
+            
+            case GameState.Playing:
+                EvaluateSceneTransition("Test_A", newState);
+                break;
+
+            case GameState.ChoosingUpgrade:
+                EvaluateSceneTransition("UpgradeScene", newState);
+                break;
+
+            case GameState.Paused:
+                ConfigureSystemSettings(newState);
+                break;
+
+            case GameState.GameOver:
+                ConfigureSystemSettings(newState);
+                break;
+        }
+    }
+    
+    /// <summary>
+    /// Checks the actively running scene name context against the targeted objective.
+    /// Triggers background loaders only if shifting between boundaries.
+    /// </summary>
+    private void EvaluateSceneTransition(string targetSceneName, GameState targetState)
+    {
+        if (SceneManager.GetActiveScene().name != targetSceneName)
+        {
+            StartCoroutine(LoadSceneAndTransitionStateAsync(targetSceneName, targetState));
         }
         else
         {
-            // Immediate state modification (no scene transition needed)
-            ConfigureSystemSettingsForState(newState);
+            // Already inside the requested scene context boundary: apply panel adjustments locally
+            ConfigureSystemSettings(targetState);
         }
     }
 
@@ -86,7 +100,8 @@ public class UIManager : MonoBehaviour
         }
 
         // 4. Scene loading finished! Configure the new structural states, timelines, and panels
-        ConfigureSystemSettingsForState(targetState);
+        ConfigureSystemSettings(targetState);
+        
         // 5. Hide the loading overlay cleanly
         loadingScreenPanel.SetActive(false);
     }
@@ -95,7 +110,7 @@ public class UIManager : MonoBehaviour
     /// Internal helper method to route data settings, activate layouts, adjust cursors, 
     /// and safely alter Unity's internal engine clock speeds.
     /// </summary>
-    private void ConfigureSystemSettingsForState(GameState state)
+    private void ConfigureSystemSettings(GameState state)
     {
         switch (state)
         {
