@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: -5397827050999167087}
   - component: {fileID: -4021479949660470640}
   - component: {fileID: 5069829508903190469}
+  - component: {fileID: 4031114976042246839}
   m_Layer: 0
   m_Name: Slime
   m_TagString: Untagged
@@ -227,6 +228,7 @@ MonoBehaviour:
   hurtDuration: 0.2
   contactKnockback: 8
   recoilForce: 3
+  knockbackMultiplier: 1
 --- !u!114 &5069829508903190469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,6 +243,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Game::DamagePopupSpawner
   popupPrefab: {fileID: 4873665682115321372, guid: 2c3f21dfcd1201f449025bf1da5d3765, type: 3}
   offset: {x: 0, y: 0.8, z: 0}
+--- !u!114 &4031114976042246839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4767175782690883853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f924ebc7cebf3cb4f88cbd648e09335e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::CoinDrop
+  coinPrefab: {fileID: 4630277846340150422, guid: 7f5279f694542cd419cd2273c41b8efe, type: 3}
+  coinCount: 1
+  scatter: 0.5
 --- !u!1001 &8673971447062832833
 PrefabInstance:
   m_ObjectHideFlags: 0
