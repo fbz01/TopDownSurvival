@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -43,6 +44,7 @@ public class PlayerController : MonoBehaviour, IKnockable
         }
         enabled = false;
         GameEvents.PlayerDied();
+        GameEvents.GameStateChanged(GameState.GameOver);
     }
     private void Update()
     {
@@ -73,6 +75,9 @@ public class PlayerController : MonoBehaviour, IKnockable
         if (keyboard.aKey.isPressed) moveInput.x -= 1;
 
         moveInput = moveInput.normalized;
+
+        // Pause game when p-key is pressed
+        if (keyboard.pKey.isPressed) GameEvents.GameStateChanged(GameState.Paused);
     }
 
     private void UpdateAnimation()
