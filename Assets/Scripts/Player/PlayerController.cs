@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour, IKnockable
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
-    private bool isPaused;
+    private GameState currentState = GameState.Playing;
     private Vector2 moveInput;
     private Vector2 lastDirection = Vector2.down;
     public Vector2 FacingDirection => lastDirection;
@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour, IKnockable
         GameEvents.OnGameStateChanged -= HandleGameStateChanged;
     }
 
-    private void HandleGameStateChanged(GameState state) => isPaused = state == GameState.Paused;
+    private void HandleGameStateChanged(GameState state) => currentState = state;
 
     private void HandleDeath()
     {
@@ -83,12 +83,13 @@ public class PlayerController : MonoBehaviour, IKnockable
         // P växlar mellan paus och spel
         if (keyboard.pKey.wasPressedThisFrame)
         {
-            GameEvents.GameStateChanged(isPaused ? GameState.Playing : GameState.Paused);
+            if (currentState == GameState.Playing) GameEvents.GameStateChanged(GameState.Paused);
+            else if (currentState == GameState.Paused) GameEvents.GameStateChanged(GameState.Playing);
             return;
         }
 
         moveInput = Vector2.zero;
-        if (isPaused) return;   // ingen rörelse medan spelet är pausat
+        if (currentState != GameState.Playing) return;
 
         if (keyboard.wKey.isPressed) moveInput.y += 1;
         if (keyboard.sKey.isPressed) moveInput.y -= 1;

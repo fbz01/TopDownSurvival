@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class PlayerStatsManager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class PlayerStatsManager : MonoBehaviour
     public int Strength { get; private set; }
     public int CritChance { get; private set; }
     public float AttackSpeedMultiplier { get; private set; }
+     public event Action OnStatsSaved;
 
     private void Awake()
     {
@@ -34,6 +36,8 @@ public class PlayerStatsManager : MonoBehaviour
         Strength = Mathf.Max(0, strength);
         CritChance = Mathf.Clamp(critChance, 0, 100);
         AttackSpeedMultiplier = Mathf.Clamp(attackSpeed, 0f, 3f);
+
+        OnStatsSaved?.Invoke();
     }
 }
 
