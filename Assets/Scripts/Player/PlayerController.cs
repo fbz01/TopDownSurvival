@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour, IKnockable
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
+    private bool isPaused;
     private Vector2 moveInput;
     private Vector2 lastDirection = Vector2.down;
     public Vector2 FacingDirection => lastDirection;
@@ -27,8 +28,19 @@ public class PlayerController : MonoBehaviour, IKnockable
         spriteRenderer = GetComponent<SpriteRenderer>();
         health = GetComponent<Health>();
     }
-    private void OnEnable() => health.OnDied += HandleDeath;
-    private void OnDisable() => health.OnDied -= HandleDeath;
+    private void OnEnable()
+    {
+        health.OnDied += HandleDeath;
+        GameEvents.OnGameStateChanged += HandleGameStateChanged;
+    }
+
+    private void OnDisable()
+    {
+        health.OnDied -= HandleDeath;
+        GameEvents.OnGameStateChanged -= HandleGameStateChanged;
+    }
+
+    private void HandleGameStateChanged(GameState state) => isPaused = state == GameState.Paused;
 
     private void HandleDeath()
     {
@@ -68,16 +80,22 @@ public class PlayerController : MonoBehaviour, IKnockable
         Keyboard keyboard = Keyboard.current;
         if (keyboard == null) return;
 
+        // P växlar mellan paus och spel
+        if (keyboard.pKey.wasPressedThisFrame)
+        {
+            GameEvents.GameStateChanged(isPaused ? GameState.Playing : GameState.Paused);
+            return;
+        }
+
         moveInput = Vector2.zero;
+        if (isPaused) return;   // ingen rörelse medan spelet är pausat
+
         if (keyboard.wKey.isPressed) moveInput.y += 1;
         if (keyboard.sKey.isPressed) moveInput.y -= 1;
         if (keyboard.dKey.isPressed) moveInput.x += 1;
         if (keyboard.aKey.isPressed) moveInput.x -= 1;
 
         moveInput = moveInput.normalized;
-
-        // Pause game when p-key is pressed
-        if (keyboard.pKey.isPressed) GameEvents.GameStateChanged(GameState.Paused);
     }
 
     private void UpdateAnimation()
