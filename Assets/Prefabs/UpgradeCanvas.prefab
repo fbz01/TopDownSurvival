@@ -151,6 +151,7 @@ GameObject:
   - component: {fileID: 6858894710197441630}
   - component: {fileID: 1934837201069413887}
   - component: {fileID: 4754153483615646754}
+  - component: {fileID: 7644279993093283135}
   m_Layer: 5
   m_Name: UpgradeCanvas
   m_TagString: Untagged
@@ -201,7 +202,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!114 &1934837201069413887
 MonoBehaviour:
@@ -243,6 +244,22 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &7644279993093283135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1380266384915026284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef3b11ef2c70e344dbd91cf66b665265, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::UpgradeManager
+  resultText: {fileID: 3925867587334022620}
+  strengthUpgrade: 5
+  critChanceUpgrade: 10
+  attackSpeedUpgrade: 0.5
 --- !u!1 &2214608901627944025
 GameObject:
   m_ObjectHideFlags: 0
@@ -406,7 +423,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 7644279993093283135}
         m_TargetAssemblyTypeName: UpgradeManager, Game
         m_MethodName: UpgradeStrength
         m_Mode: 1
@@ -676,7 +693,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 7644279993093283135}
         m_TargetAssemblyTypeName: UpgradeManager, Game
         m_MethodName: ConfirmUpgrades
         m_Mode: 1
@@ -842,7 +859,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1778061247729532891
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1021,7 +1038,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 7644279993093283135}
         m_TargetAssemblyTypeName: UpgradeManager, Game
         m_MethodName: UpgradeSpeed
         m_Mode: 1
@@ -1507,7 +1524,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 7644279993093283135}
         m_TargetAssemblyTypeName: UpgradeManager, Game
         m_MethodName: UpgradeCritChance
         m_Mode: 1

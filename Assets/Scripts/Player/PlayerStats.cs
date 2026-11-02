@@ -27,6 +27,15 @@ public class PlayerStats : MonoBehaviour
     private void Start()
     {
         LoadSavedStats();
+
+        if (PlayerStatsManager.Instance != null)
+            PlayerStatsManager.Instance.OnStatsSaved += LoadSavedStats;
+    }
+
+        private void OnDestroy()
+    {
+        if (PlayerStatsManager.Instance != null)
+            PlayerStatsManager.Instance.OnStatsSaved -= LoadSavedStats;
     }
 
     // Gubben avgör om slaget blir en crit. Ett vapen kan ge extra chans.

@@ -49,7 +49,7 @@ public class UIManager : MonoBehaviour
                 break;
 
             case GameState.ChoosingUpgrade:
-                EvaluateSceneTransition("UpgradeScene", newState);
+                ConfigureSystemSettings(newState);
                 break;
 
             case GameState.Paused:

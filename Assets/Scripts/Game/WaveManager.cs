@@ -13,13 +13,13 @@ public class WaveManager : MonoBehaviour
     private void OnEnable()
     {
         GameEvents.OnEnemyKilled += HandleEnemyKilled;
-        GameEvents.OnPlayerDied  += HandlePlayerDied;
+        GameEvents.OnPlayerDied += HandlePlayerDied;
     }
 
     private void OnDisable()
     {
         GameEvents.OnEnemyKilled -= HandleEnemyKilled;
-        GameEvents.OnPlayerDied  -= HandlePlayerDied;
+        GameEvents.OnPlayerDied -= HandlePlayerDied;
     }
 
     private void Start() => StartCoroutine(RunWaves());
@@ -39,7 +39,10 @@ public class WaveManager : MonoBehaviour
             GameEvents.WaveCompleted(waveNumber);
 
             if (i < waves.Length - 1)
+            {
+                GameEvents.GameStateChanged(GameState.ChoosingUpgrade);
                 yield return new WaitForSeconds(pauseBetweenWaves);
+            }
         }
 
         Debug.Log("Alla waves klara!");   // här kan en vinstskärm visas senare

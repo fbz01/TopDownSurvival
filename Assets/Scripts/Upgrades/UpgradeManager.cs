@@ -20,20 +20,20 @@ public class UpgradeManager : MonoBehaviour
     private bool critChanceSelected;
     private bool attackSpeedSelected;
 
-    private void Start()
+    private void OnEnable()
     {
         var stats = PlayerStatsManager.Instance;
-        
-        if (stats == null)
-        {
-            Debug.LogError("PlayerStatsManager missing!");
-            return;
-        }
+        if (stats == null) return;
 
-        // Start with players current values
         newStrength = stats.Strength;
         newCritChance = stats.CritChance;
         newAttackSpeed = stats.AttackSpeedMultiplier;
+
+        strengthSelected = false;
+        critChanceSelected = false;
+        attackSpeedSelected = false;
+
+        if (resultText != null) resultText.text = "";
     }
 
     public void UpgradeStrength()
