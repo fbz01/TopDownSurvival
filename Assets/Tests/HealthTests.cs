@@ -54,4 +54,59 @@ public class HealthTests
         Assert.AreEqual(100, health.Current);
     }
 
+    [Test]
+    public void TakeDamage_WithNegativeAmount_DoesNothing()
+    {
+        health.TakeDamage(-10);
+        Assert.AreEqual(100, health.Current);
+    }
+
+    [Test]
+    public void Heal_WhenDead_DoesNotRevive()
+    {
+        health.TakeDamage(100);
+        health.Heal(20);
+        Assert.AreEqual(0, health.Current);
+    }
+
+    [Test]
+    public void OnDied_IsInvokedExactlyOnce()
+    {
+        int diedCount = 0;
+        health.OnDied += () => diedCount++;
+
+        health.TakeDamage(100);
+        health.TakeDamage(10);   // slår på en redan död
+
+        Assert.AreEqual(1, diedCount);
+    }
+
+    [Test]
+    public void OnDied_IsNotInvoked_WhenStillAlive()
+    {
+        bool died = false;
+        health.OnDied += () => died = true;
+
+        health.TakeDamage(99);
+
+        Assert.IsFalse(died);
+    }
+
+    [Test]
+    public void OnDamaged_SendsAmountAndCritFlag()
+    {
+        int receivedAmount = 0;
+        bool receivedCrit = false;
+        health.OnDamaged += (amount, isCrit) =>
+        {
+            receivedAmount = amount;
+            receivedCrit = isCrit;
+        };
+
+        health.TakeDamage(25, true);
+
+        Assert.AreEqual(25, receivedAmount);
+        Assert.IsTrue(receivedCrit);
+    }
+
 }

@@ -27,7 +27,7 @@ public class Health : MonoBehaviour, IDamageable
 
     public void TakeDamage(int amount, bool isCrit = false)
     {
-        if (Current <= 0) return;
+        if (Current <= 0 || amount <= 0) return;
 
         Current = Mathf.Max(Current - amount, 0);
         OnDamaged?.Invoke(amount, isCrit);
@@ -39,6 +39,8 @@ public class Health : MonoBehaviour, IDamageable
 
     public void Heal(int amount)
     {
+        if (Current <= 0 || amount <= 0) return;
+
         Current = Mathf.Min(Current + amount, maxHealth);
         OnHealthChanged?.Invoke(Current, maxHealth);
     }

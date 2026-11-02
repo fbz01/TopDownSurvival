@@ -231,7 +231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Game::PlayerStats
   strength: 5
   bonusDamage: 0
-  critChance: 50
+  critChance: 15
   critMultiplier: 2
   attackSpeedMultiplier: 1
   maxAttackSpeedMultiplier: 3

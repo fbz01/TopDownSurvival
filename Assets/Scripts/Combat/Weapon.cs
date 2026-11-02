@@ -15,10 +15,11 @@ public class Weapon : MonoBehaviour
     private float nextAttackTime;
 
     public WeaponData CurrentWeapon => currentWeapon;
-    public int Damage => currentWeapon.BaseDamage + stats.BonusDamage + stats.Strength;
-    public float AttackCooldown =>
-        1f / (currentWeapon.AttacksPerSecond * stats.AttackSpeedMultiplier);
+    public int Damage =>
+        DamageCalculator.Calculate(currentWeapon.BaseDamage, stats.BonusDamage, stats.Strength);
 
+    public float AttackCooldown =>
+        DamageCalculator.Cooldown(currentWeapon.AttacksPerSecond, stats.AttackSpeedMultiplier);
     public event Action<Vector2> OnAttack;
     public event Action<WeaponData> OnWeaponChanged;
 
@@ -30,6 +31,7 @@ public class Weapon : MonoBehaviour
 
     private void Update()
     {
+        if (Time.timeScale == 0f) return;
         if (currentWeapon == null) return;
 
         Keyboard keyboard = Keyboard.current;
@@ -48,13 +50,9 @@ public class Weapon : MonoBehaviour
 
     private int CalculateDamage(out bool isCrit)
     {
-        int damage = currentWeapon.BaseDamage + stats.BonusDamage + stats.Strength;
-
         isCrit = stats.RollCrit();
-        if (isCrit)
-            damage = Mathf.RoundToInt(damage * stats.CritMultiplier);
-
-        return damage;
+        return DamageCalculator.Calculate(currentWeapon.BaseDamage, stats.BonusDamage,
+        stats.Strength, isCrit, stats.CritMultiplier);
     }
 
     private void Attack()
