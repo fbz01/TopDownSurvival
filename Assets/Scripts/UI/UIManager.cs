@@ -29,6 +29,11 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("UIManager Start körs!");
+
+        Debug.Log("MainMenuPanel referens: " +
+            (mainMenuPanel != null ? mainMenuPanel.name : "NULL"));
+        
         ConfigureSystemSettings(GameState.Menu);
     }
 
@@ -117,6 +122,8 @@ public class UIManager : MonoBehaviour
     /// </summary>
     private void ConfigureSystemSettings(GameState state)
     {
+        Debug.Log("GameState ändras till: " + state);
+        
         switch (state)
         {
             case GameState.Menu:

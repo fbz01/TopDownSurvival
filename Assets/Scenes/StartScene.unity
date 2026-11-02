@@ -335,17 +335,6 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
---- !u!114 &1097572639 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 376470936686878693, guid: b233d05329d9673489b9aaa7980f3423, type: 3}
-  m_PrefabInstance: {fileID: 6867666290057719988}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2da0c512f12947e489f739169773d7ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TMP_InputField
 --- !u!1 &1434334954
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,7 +364,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df605995e5cd8f04d96c29e50563f7c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::StartSceneController
-  nameInput: {fileID: 1097572639}
+  nameInput: {fileID: 1525225068}
 --- !u!4 &1434334956
 Transform:
   m_ObjectHideFlags: 0
@@ -391,6 +380,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1525225068 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1519889185331067820, guid: f9aeb8511481f4d4db218538e903644f, type: 3}
+  m_PrefabInstance: {fileID: 6375679629790145423}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2da0c512f12947e489f739169773d7ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TMP_InputField
 --- !u!1 &1992972594
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,14 +532,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Global_UIManager
       objectReference: {fileID: 0}
-    - target: {fileID: 4077323050024456589, guid: f9aeb8511481f4d4db218538e903644f, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4564030797441640781, guid: f9aeb8511481f4d4db218538e903644f, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
+    - target: {fileID: 2046152181384545633, guid: f9aeb8511481f4d4db218538e903644f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1434334955}
     - target: {fileID: 5480500251268167276, guid: f9aeb8511481f4d4db218538e903644f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 325.99753
@@ -580,6 +576,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5932297305027146809, guid: f9aeb8511481f4d4db218538e903644f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -593,22 +593,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 885979780975321384, guid: b233d05329d9673489b9aaa7980f3423, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1434334955}
-    - target: {fileID: 2766320350035991513, guid: b233d05329d9673489b9aaa7980f3423, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 574961495}
-    - target: {fileID: 6452303640504359852, guid: b233d05329d9673489b9aaa7980f3423, type: 3}
-      propertyPath: m_fontColor.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6452303640504359852, guid: b233d05329d9673489b9aaa7980f3423, type: 3}
-      propertyPath: m_fontColor32.rgba
-      value: 4281479730
-      objectReference: {fileID: 0}
     - target: {fileID: 6524021823656408509, guid: b233d05329d9673489b9aaa7980f3423, type: 3}
       propertyPath: m_Pivot.x
       value: 0
