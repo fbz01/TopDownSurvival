@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab14165992bc77b4a8f63f61f7975dbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Health
-  maxHealth: 100
+  maxHealth: 10000
 --- !u!114 &-4021479949660470640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d4ce5c5a72550448a9541ef04a15cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Enemy
-  moveSpeed: 2
+  moveSpeed: 0
   contactDamage: 10
   damageCooldown: 1
   scoreValue: 10
