@@ -1,14 +1,11 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Collections;
 
 [RequireComponent(typeof(PlayerController), typeof(PlayerStats))]
 public class Weapon : MonoBehaviour
 {
     [SerializeField] private WeaponData currentWeapon;
-    [SerializeField] private Vector2 bodyOffset = new Vector2(0f, 05f);
-    [SerializeField] private Vector2 projectileOffset = new Vector2(0f, 0.3f);
 
     private PlayerController controller;
     private PlayerStats stats;
@@ -22,6 +19,8 @@ public class Weapon : MonoBehaviour
         DamageCalculator.Cooldown(currentWeapon.AttacksPerSecond, stats.AttackSpeedMultiplier);
     public event Action<Vector2> OnAttack;
     public event Action<WeaponData> OnWeaponChanged;
+
+    private AttackStrategy Strategy => currentWeapon != null ? currentWeapon.AttackStrategy : null;
 
     private void Awake()
     {
@@ -58,59 +57,33 @@ public class Weapon : MonoBehaviour
     private void Attack()
     {
         nextAttackTime = Time.time + AttackCooldown;
-        int damage = CalculateDamage(out bool isCrit);
 
-        if (currentWeapon.IsRanged)
-            StartCoroutine(FireProjectile(damage, isCrit, controller.FacingDirection));
-        else
-            MeleeHit(damage, isCrit);
-
-        OnAttack?.Invoke(controller.FacingDirection);
-    }
-
-    private void MeleeHit(int damage, bool isCrit)
-    {
-        Collider2D[] hits = Physics2D.OverlapCircleAll(GetHitCenter(), currentWeapon.Radius);
-        foreach (Collider2D hit in hits)
+        if (Strategy == null)
         {
-            if (hit.gameObject == gameObject) continue;
-
-            if (hit.TryGetComponent(out IDamageable target))
-            {
-                target.TakeDamage(damage, isCrit);
-
-                if (hit.TryGetComponent(out IKnockable knockbackable))
-                {
-                    Vector2 away = ((Vector2)hit.transform.position - (Vector2)transform.position).normalized;
-                    knockbackable.ApplyKnockback(away, currentWeapon.KnockbackForce);
-                }
-            }
+            Debug.LogWarning($"{currentWeapon.name} saknar AttackStrategy.", currentWeapon);
+            return;
         }
-    }
 
-    private IEnumerator FireProjectile(int damage, bool isCrit, Vector2 direction)
-    {
-        WeaponData firedWith = currentWeapon;
+        int damage = CalculateDamage(out bool isCrit);
+        Vector2 direction = controller.FacingDirection;
 
-        yield return new WaitForSeconds(firedWith.ReleaseDelay);
+        AttackContext context = new AttackContext(this, direction, damage, isCrit,
+                                                  currentWeapon.KnockbackForce);
+        Strategy.Execute(context);
 
-        Vector2 spawnPos = (Vector2)transform.position + projectileOffset + direction * 0.3f;
-        Projectile arrow = Instantiate(firedWith.ProjectilePrefab, spawnPos, Quaternion.identity);
-        arrow.Launch(direction, firedWith.ProjectileSpeed, damage, isCrit,
-                     firedWith.KnockbackForce, gameObject);
+        OnAttack?.Invoke(direction);
     }
 
     public Vector2 GetHitCenter()
     {
-        return (Vector2)transform.position + bodyOffset
-             + controller.FacingDirection * currentWeapon.Range;
+        if (Strategy == null) return transform.position;
+        return Strategy.GetHitCenter(transform.position, controller.FacingDirection);
     }
 
     private void OnDrawGizmosSelected()
     {
-        if (currentWeapon == null) return;
+        if (Strategy == null) return;
         if (controller == null) controller = GetComponent<PlayerController>();
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(GetHitCenter(), currentWeapon.Radius);
+        Strategy.DrawGizmos(transform.position, controller.FacingDirection);
     }
 }
