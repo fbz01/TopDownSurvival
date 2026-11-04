@@ -134,7 +134,7 @@ public class UIManager : MonoBehaviour
             
             case GameState.Playing:
                 Time.timeScale = 1f;
-                SetCursorStatus(false);
+                SetCursorStatus(true);
                 ToggleUIPanels(mainMenu: false, pause: false, upgrade: false, over: false);
                 break;
             
