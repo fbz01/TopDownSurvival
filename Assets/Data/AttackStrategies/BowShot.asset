@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 754e9ee8f04fb9247bdf0348eff98ecd, type: 3}
   m_Name: BowShot
   m_EditorClassIdentifier: Game::RangedAttackStrategy
-  projectilePrefab: {fileID: 0}
+  projectilePrefab: {fileID: -1619584416956579550, guid: 6754a22be851adf49989f8df7cda7cd5, type: 3}
   projectileSpeed: 12
   releaseDelay: 0.17
   spawnOffset: {x: 0, y: 0.3}

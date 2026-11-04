@@ -16,12 +16,8 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 9a9feca1c70db31439dea3184ab695ea, type: 3}
   baseDamage: 25
   attacksPerSecond: 2
-  range: 1.2
-  radius: 0.5
   knockbackForce: 6
+  attackStrategy: {fileID: 11400000, guid: 8230637f44af340479c857cb9d17fad9, type: 2}
   animatorOverride: {fileID: 0}
   effectPrefab: {fileID: 2001118695858072744, guid: 36d02454bb3f0bb44926b00b3219d188, type: 3}
   attackSound: {fileID: 8300000, guid: 86463a4c73281374cacbe73b01285b2b, type: 3}
-  projectilePrefab: {fileID: 0}
-  projectileSpeed: 12
-  releaseDelay: 0.17

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95395171445707943a1015e1224d66b3, type: 3}
   m_Name: GreatswordSpin
   m_EditorClassIdentifier: Game::MeleeAttackStrategy
-  range: 0.8
-  radius: 0.6
+  range: 0
+  radius: 2
   bodyOffset: {x: 0, y: 0.6}
