@@ -1,6 +1,8 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Weapon), typeof(Animator))]
+
+// Plays the attack animation, effect and sound when Weapon attacks.
 public class SwordSwing : MonoBehaviour
 {
     [SerializeField] private GameObject slashEffectPrefab;
@@ -19,10 +21,10 @@ public class SwordSwing : MonoBehaviour
         baseController = animator.runtimeAnimatorController;
     }
 
-    // ÄNDRAD: lyssnar nu även på vapenbyte
     private void OnEnable()
     {
         weapon.OnAttack += HandleAttack;
+        // Swap animations to match the weapon
         weapon.OnWeaponChanged += ApplyWeaponVisuals;
     }
 
@@ -68,6 +70,7 @@ public class SwordSwing : MonoBehaviour
         AudioClip clip = weapon.CurrentWeapon.AttackSound;
         if (clip == null || audioSource == null) return;
 
+        // Small random pitch so repeated attacks don't sound identical.
         audioSource.pitch = 1f + Random.Range(-pitchVariation, pitchVariation);
         audioSource.PlayOneShot(clip);
     }

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Game::WaveData
   enemies:
   - enemyPrefab: {fileID: -4021479949660470640, guid: 6671fe572dac3c5469448bea21513811, type: 3}
-    count: 1
+    count: 5
   spawnInterval: 1

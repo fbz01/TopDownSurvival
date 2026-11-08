@@ -6,17 +6,17 @@ public class HealthTests
     private Health health;
     private PlayerStats attackerStats;
 
-    // setup körs före test
+    // SetUp runs before each test
     [SetUp]
     public void SetUp()
     {
         health = new GameObject("TestObject").AddComponent<Health>();
-        health.ResetHealth();
+        health.ResetHealth(); // Awake doesn't run in Edit Mode, so health is set manually
 
         attackerStats = new GameObject("TestPlayer").AddComponent<PlayerStats>();
     }
 
-    // teardown städar upp och körs efter testet
+    // TearDown cleans up after each test
     [TearDown]
     public void TearDown()
     {
@@ -76,7 +76,7 @@ public class HealthTests
         health.OnDied += () => diedCount++;
 
         health.TakeDamage(100);
-        health.TakeDamage(10);   // slår på en redan död
+        health.TakeDamage(10);   // hitting an already dead object
 
         Assert.AreEqual(1, diedCount);
     }

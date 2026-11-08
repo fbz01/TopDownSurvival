@@ -37,7 +37,7 @@ public class StatsUI : MonoBehaviour
 
     private void UpdateText()
     {
-        CultureInfo dot = CultureInfo.InvariantCulture;
+        CultureInfo dot = CultureInfo.InvariantCulture; // always "1.5".
 
         string weaponLine = weapon != null && weapon.CurrentWeapon != null
             ? $"<b>{weapon.CurrentWeapon.DisplayName}</b>  {weapon.Damage} dmg\n"

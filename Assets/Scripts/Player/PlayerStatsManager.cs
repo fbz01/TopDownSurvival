@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 
+// Singleton that keeps the upgraded stats between scenes
 public class PlayerStatsManager : MonoBehaviour
 {
     public static PlayerStatsManager Instance { get; private set; }
@@ -17,6 +18,7 @@ public class PlayerStatsManager : MonoBehaviour
 
     private void Awake()
     {
+        // Destroy duplicates, e.g. when the start scene is loaded again.
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);

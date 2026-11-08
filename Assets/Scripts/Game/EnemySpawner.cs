@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private Vector2 arenaSize = new Vector2(15f, 8f); // området innanför väggarna
+    [SerializeField] private Vector2 arenaSize = new Vector2(15f, 8f); // the area inside the walls 
     [SerializeField] private float minDistanceToPlayer = 3f;
 
 
@@ -21,6 +21,7 @@ public class EnemySpawner : MonoBehaviour
     public Enemy Spawn(Enemy prefab)
     {
         Vector2 position = RandomEdgePoint();
+        // Up to 10 tries to find a point far enough from the player.
         for (int i = 0; i < 10 && IsTooCloseToPlayer(position); i++)
             position = RandomEdgePoint();
 

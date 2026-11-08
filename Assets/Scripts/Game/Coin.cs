@@ -38,9 +38,11 @@ public class Coin : MonoBehaviour
             return;
         }
 
+        // Blink during the last seconds before disappearing.
         if (age > lifetime - blinkTime)
             spriteRenderer.enabled = Mathf.FloorToInt(age * 10f) % 2 == 0;
 
+        // Pulled towards the player when within magnetRange.
         if (player != null && Vector2.Distance(transform.position, player.position) < magnetRange)
             transform.position = Vector2.MoveTowards(transform.position, player.position,
                                                      magnetSpeed * Time.deltaTime);

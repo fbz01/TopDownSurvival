@@ -19,6 +19,7 @@ public class WeaponSwitcher : MonoBehaviour
 
     private void Update()
     {
+        // Weapon is disabled when the player dies
         if (!weapon.enabled) return;
         if (weapons.Length < 2) return;
 

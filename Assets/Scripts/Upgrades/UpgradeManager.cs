@@ -2,6 +2,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// Upgrade menu. Choices are only previewed until ConfirmUpgrades saves them
+// to PlayerStatsManager.
 public class UpgradeManager : MonoBehaviour
 {
     [Header("UI")]

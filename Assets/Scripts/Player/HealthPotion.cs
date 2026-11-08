@@ -32,7 +32,7 @@ public class HealthPotion : MonoBehaviour
     {
         if (!IsReady) return;
         if (health.Current <= 0) return;
-        if (health.Current >= health.Max) return;
+        if (health.Current >= health.Max) return; // don't use the potion at full health
 
         health.Heal(healAmount);
         nextUseTime = Time.time + cooldown;
