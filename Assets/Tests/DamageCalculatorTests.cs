@@ -43,8 +43,7 @@ public class DamageCalculatorTests
     {
         Assert.AreEqual(0.25f, DamageCalculator.Cooldown(2f, 2f), 0.0001f);
     }
-
-    // Visar nuvarande beteende: speed 0 = spelaren kan aldrig attackera
+    
     [Test]
     public void Cooldown_WithZeroSpeed_IsInfinite()
     {

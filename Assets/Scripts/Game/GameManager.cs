@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// Keeps track of score, wave and game state by listening to GameEvents.
 public class GameManager : MonoBehaviour
 {
     public int Score { get; private set; }

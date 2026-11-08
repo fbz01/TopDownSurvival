@@ -2,6 +2,8 @@ using System.Collections;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewRangedAttack", menuName = "Game/Attack Strategies/Ranged")]
+
+// Fires one projectile in the facing direction.
 public class RangedAttackStrategy : AttackStrategy
 {
     [SerializeField] private Projectile projectilePrefab;
@@ -18,7 +20,7 @@ public class RangedAttackStrategy : AttackStrategy
             return;
         }
 
-        // ScriptableObjects kan inte köra coroutines, så vi lånar ägarens.
+        // ScriptableObjects can't run coroutines, so the owner's is borrowed.
         context.Owner.StartCoroutine(FireAfterDelay(context));
     }
 

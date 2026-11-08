@@ -1,6 +1,8 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewMeleeAttack", menuName = "Game/Attack Strategies/Melee")]
+
+// Damages and knocks back everything in a circle in front of the owner.
 public class MeleeAttackStrategy : AttackStrategy
 {
     [SerializeField] private float range = 0.8f;
@@ -14,7 +16,8 @@ public class MeleeAttackStrategy : AttackStrategy
 
         foreach (Collider2D hit in hits)
         {
-            if (hit.gameObject == context.Owner.gameObject) continue;
+            
+            if (hit.gameObject == context.Owner.gameObject) continue; // don't hit self
 
             if (hit.TryGetComponent(out IDamageable target))
             {

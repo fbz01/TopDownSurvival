@@ -8,17 +8,16 @@ public class Health : MonoBehaviour, IDamageable
     public int Current { get; private set; }
     public int Max => maxHealth;
 
-    public event Action<int, int> OnHealthChanged; // event att lyssna på <nuvarande health, max health>
-    public event Action<int, bool> OnDamaged;
+    public event Action<int, int> OnHealthChanged; // current, max
+    public event Action<int, bool> OnDamaged; // amount, isCrit
 
     public event Action OnDied;
-    // metod för testerna
     private void Awake()
     {
         ResetHealth();
     }
 
-    // metod för testerna
+    // Public so the unit tests can call it, since Awake doesn't run in Edit Mode tests.
     public void ResetHealth()
     {
         Current = maxHealth;
@@ -27,6 +26,7 @@ public class Health : MonoBehaviour, IDamageable
 
     public void TakeDamage(int amount, bool isCrit = false)
     {
+        // Ignore dead objects and negative amounts (bugs found by HealthTests).
         if (Current <= 0 || amount <= 0) return;
 
         Current = Mathf.Max(Current - amount, 0);
@@ -39,6 +39,7 @@ public class Health : MonoBehaviour, IDamageable
 
     public void Heal(int amount)
     {
+        // Ignore dead objects and negative amounts (bugs found by HealthTests).
         if (Current <= 0 || amount <= 0) return;
 
         Current = Mathf.Min(Current + amount, maxHealth);

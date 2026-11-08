@@ -1,6 +1,8 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewWeapon", menuName = "Game/Weapon")]
+
+// Data asset for one weapon. The attack behavior is the referenced AttackStrategy.
 public class WeaponData : ScriptableObject
 {
     [Header("Generellt")]

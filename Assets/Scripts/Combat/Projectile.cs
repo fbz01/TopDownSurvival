@@ -28,7 +28,7 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject == owner) return; 
+        if (other.gameObject == owner) return; // don't hit the shooter
 
         if (other.TryGetComponent(out IDamageable target))
         {
@@ -39,6 +39,7 @@ public class Projectile : MonoBehaviour
 
             Destroy(gameObject);
         }
+        // Destroyed by walls, but passes through other triggers like coins.
         else if (!other.isTrigger)
         {
             Destroy(gameObject);

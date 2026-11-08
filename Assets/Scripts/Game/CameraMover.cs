@@ -6,7 +6,7 @@ public class CameraMover : MonoBehaviour
     private float horizontalOffset;
     private float verticalOffset;
     
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    // Keeps the camera's starting offset to the player.
     void Start()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -15,7 +15,6 @@ public class CameraMover : MonoBehaviour
         verticalOffset = transform.position.y - playerTransform.position.y;
     }
 
-    // Update is called once per frame
     void Update()
     {
         Vector3 updatedCameraPosition = transform.position;

@@ -2,6 +2,8 @@ using System.Collections;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewMultiShotAttack", menuName = "Game/Attack Strategies/Multi Shot")]
+
+// Like RangedAttackStrategy, but fires several projectiles.
 public class MultiShotAttackStrategy : AttackStrategy
 {
     [SerializeField] private Projectile projectilePrefab;
@@ -21,7 +23,6 @@ public class MultiShotAttackStrategy : AttackStrategy
             Debug.LogWarning($"{name} saknar projectilePrefab.", this);
             return;
         }
-
         context.Owner.StartCoroutine(FireAfterDelay(context));
     }
 
@@ -40,7 +41,7 @@ public class MultiShotAttackStrategy : AttackStrategy
         }
     }
 
-    // Fördelar pilarna jämnt runt mittriktningen, t.ex. -15°, 0°, +15° för tre pilar.
+    // Spreads the arrows evenly around the aim direction, e.g. -15°, 0°, +15° for three.
     private Vector2 GetSpreadDirection(Vector2 direction, int index)
     {
         float angle = (index - (projectileCount - 1) / 2f) * spreadAngle;

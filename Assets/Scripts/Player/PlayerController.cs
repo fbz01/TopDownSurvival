@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour, IKnockable
     private GameState currentState = GameState.Playing;
     private Vector2 moveInput;
     private Vector2 lastDirection = Vector2.down;
-    public Vector2 FacingDirection => lastDirection;
+    public Vector2 FacingDirection => lastDirection; // used by Weapon to aim attacks
     private Health health;
     private float knockedUntil;
     private bool IsKnockedBack => Time.time < knockedUntil;
@@ -45,13 +45,13 @@ public class PlayerController : MonoBehaviour, IKnockable
     private void HandleDeath()
     {
         rb.linearVelocity = Vector2.zero;
-        rb.bodyType = RigidbodyType2D.Kinematic;
+        rb.bodyType = RigidbodyType2D.Kinematic; // stops physics from moving the dead player
         GetComponent<Collider2D>().enabled = false;
         GetComponent<Weapon>().enabled = false;
         animator.SetTrigger("Die");
         if (audioSource != null && deathSound != null)
         {
-            audioSource.pitch = 1f;            // återställ tonhöjden från svärdsljuden
+            audioSource.pitch = 1f;            // reset pitch changed by the attack sounds
             audioSource.PlayOneShot(deathSound);
         }
         enabled = false;
@@ -66,6 +66,7 @@ public class PlayerController : MonoBehaviour, IKnockable
 
     private void FixedUpdate()
     {
+        // Ignore movement input during knockback and slow down gradually.
         if (IsKnockedBack)
         {
             rb.linearVelocity *= 0.85f;
@@ -80,7 +81,7 @@ public class PlayerController : MonoBehaviour, IKnockable
         Keyboard keyboard = Keyboard.current;
         if (keyboard == null) return;
 
-        // P växlar mellan paus och spel
+        // P toggles between paused and playing
         if (keyboard.pKey.wasPressedThisFrame)
         {
             if (currentState == GameState.Playing) GameEvents.GameStateChanged(GameState.Paused);
@@ -96,6 +97,7 @@ public class PlayerController : MonoBehaviour, IKnockable
         if (keyboard.dKey.isPressed) moveInput.x += 1;
         if (keyboard.aKey.isPressed) moveInput.x -= 1;
 
+        // diagonal movement isn't faster
         moveInput = moveInput.normalized;
     }
 

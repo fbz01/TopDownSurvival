@@ -5,7 +5,7 @@ public class CoinDrop : MonoBehaviour
 {
     [SerializeField] private Coin coinPrefab;
     [SerializeField] private int coinCount = 1;
-    [SerializeField] private float scatter = 0.5f; 
+    [SerializeField] private float scatter = 0.5f;
 
     private Health health;
     private Enemy enemy;
@@ -16,13 +16,14 @@ public class CoinDrop : MonoBehaviour
         enemy = GetComponent<Enemy>();
     }
 
-    private void OnEnable()  => health.OnDied += Drop;
+    private void OnEnable() => health.OnDied += Drop;
     private void OnDisable() => health.OnDied -= Drop;
 
     private void Drop()
     {
         if (coinPrefab == null) return;
 
+        // Splits the enemy's score value across the coins.
         int valuePerCoin = Mathf.Max(1, enemy.ScoreValue / coinCount);
 
         for (int i = 0; i < coinCount; i++)

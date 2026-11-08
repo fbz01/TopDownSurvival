@@ -45,13 +45,13 @@ public class BossJumpAttack : MonoBehaviour
         {
             yield return new WaitForSeconds(cooldown);
             if (enemy.IsDead || player == null) yield break;
-            yield return JumpAttack();   // vänta tills hela hoppet är klart
+            yield return JumpAttack(); // wait until the whole jump is done 
         }
     }
 
     private IEnumerator JumpAttack()
     {
-        enemy.IsBusy = true;
+        enemy.IsBusy = true; // pauses Enemy's chase and contact damage during the jump
         rb.linearVelocity = Vector2.zero;
         animator.SetTrigger("Jump");
 
@@ -60,7 +60,7 @@ public class BossJumpAttack : MonoBehaviour
 
         Vector2 start = rb.position;
         Vector2 target = Vector2.MoveTowards(start, player.position, maxJumpDistance);
-        col.enabled = false;   // flyger över spelaren i stället för att knuffa
+        col.enabled = false; // flies over the player instead of pushing them
 
         for (float t = 0f; t < airTime; t += Time.fixedDeltaTime)
         {
@@ -77,6 +77,7 @@ public class BossJumpAttack : MonoBehaviour
         enemy.IsBusy = false;
     }
 
+    // Damages and knocks back the player if within slamRadius.
     private void Slam()
     {
         if (slamEffectPrefab != null)

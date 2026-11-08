@@ -3,6 +3,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerController), typeof(PlayerStats))]
+
+// Context in the Strategy pattern: handles input, cooldown and damage,
+// and lets the weapon's AttackStrategy perform the actual attack.
 public class Weapon : MonoBehaviour
 {
     [SerializeField] private WeaponData currentWeapon;
@@ -17,7 +20,7 @@ public class Weapon : MonoBehaviour
 
     public float AttackCooldown =>
         DamageCalculator.Cooldown(currentWeapon.AttacksPerSecond, stats.AttackSpeedMultiplier);
-    public event Action<Vector2> OnAttack;
+    public event Action<Vector2> OnAttack; // used by SwordSwing for animation, effect and sound
     public event Action<WeaponData> OnWeaponChanged;
 
     private AttackStrategy Strategy => currentWeapon != null ? currentWeapon.AttackStrategy : null;
@@ -30,7 +33,7 @@ public class Weapon : MonoBehaviour
 
     private void Update()
     {
-        if (Time.timeScale == 0f) return;
+        if (Time.timeScale == 0f) return;  // no attacks while paused or in the upgrade menu
         if (currentWeapon == null) return;
 
         Keyboard keyboard = Keyboard.current;

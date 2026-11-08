@@ -8,6 +8,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private float firstWaveDelay = 2f;
     [SerializeField] private float pauseBetweenWaves = 3f;
 
+    // Counted up on spawn and down on OnEnemyKilled, so the wave is cleared at zero.
     private int aliveCount;
 
     private void OnEnable()
@@ -35,7 +36,7 @@ public class WaveManager : MonoBehaviour
 
             yield return SpawnWave(waves[i]);
 
-            yield return new WaitUntil(() => aliveCount <= 0);   // alla döda
+            yield return new WaitUntil(() => aliveCount <= 0); // wait until all enemies are dead
             GameEvents.WaveCompleted(waveNumber);
 
             if (i < waves.Length - 1)
@@ -45,7 +46,7 @@ public class WaveManager : MonoBehaviour
             }
         }
 
-        Debug.Log("Alla waves klara!");   // här kan en vinstskärm visas senare
+        Debug.Log("Alla waves klara!"); // a victory screen can be shown here later
     }
 
     private IEnumerator SpawnWave(WaveData wave)
@@ -63,5 +64,5 @@ public class WaveManager : MonoBehaviour
 
     private void HandleEnemyKilled(Enemy enemy) => aliveCount--;
 
-    private void HandlePlayerDied() => StopAllCoroutines();   // inga nya fiender efter Game Over
+    private void HandlePlayerDied() => StopAllCoroutines();   // no new enemies after game over
 }

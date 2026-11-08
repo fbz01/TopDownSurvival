@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour, IKnockable
 
     public int ScoreValue => scoreValue;
     public bool IsDead { get; private set; }
-    public bool IsBusy { get; set; }
+    public bool IsBusy { get; set; } // set by BossJumpAttack to pause normal movement
 
     private Rigidbody2D rb;
     private Health health;
@@ -56,11 +56,11 @@ public class Enemy : MonoBehaviour, IKnockable
 
         if (IsStunned)
         {
-            rb.linearVelocity *= 0.85f;
+            rb.linearVelocity *= 0.85f; // slow down gradually while stunned
             return;
         }
 
-        // jaga spelaren
+        // Chase the player
         Vector2 direction = ((Vector2)player.position - rb.position).normalized;
         rb.linearVelocity = direction * moveSpeed;
     }
@@ -90,7 +90,7 @@ public class Enemy : MonoBehaviour, IKnockable
 
             if (collision.gameObject.TryGetComponent(out IKnockable knockable))
                 knockable.ApplyKnockback(pushDirection, contactKnockback);
-
+            // Bounce back and pause briefly so the enemy doesn't hit every frame.
             rb.linearVelocity = -pushDirection * recoilForce;
             stunnedUntil = Time.time + 0.3f;
         }
@@ -108,13 +108,13 @@ public class Enemy : MonoBehaviour, IKnockable
     {
         IsDead = true;
         rb.linearVelocity = Vector2.zero;
-        GetComponent<Collider2D>().enabled = false; // inga fler träffar eller knuffar
+        GetComponent<Collider2D>().enabled = false; // no more hits or knockback
 
         animator.SetTrigger("Die");
         if (deathSound != null)
             AudioSource.PlayClipAtPoint(deathSound, Camera.main.transform.position, deathVolume);
         GameEvents.EnemyKilled(this);
 
-        Destroy(gameObject, deathDuration); // ta bort när animationen har spelats
+        Destroy(gameObject, deathDuration); // removed once the death animation has played
     }
 }

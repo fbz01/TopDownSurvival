@@ -8,14 +8,14 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private int bonusDamage = 0;
 
     [Header("Crit")]
-    [SerializeField, Range(0, 100)] private int critChance = 10;    // procent
+    [SerializeField, Range(0, 100)] private int critChance = 10;    // percent
     [SerializeField] private float critMultiplier = 2f;
 
     [Header("Attackhastighet")]
     [SerializeField] private float attackSpeedMultiplier = 1f;
     [SerializeField] private float maxAttackSpeedMultiplier = 3f;
 
-    // Skickas när något värde ändras, så att UI kan uppdateras
+    // Raised when a value changes, so the UI can update.
     public event Action OnStatsChanged;
 
     public int Strength => strength;
@@ -29,6 +29,7 @@ public class PlayerStats : MonoBehaviour
         LoadSavedStats();
 
         if (PlayerStatsManager.Instance != null)
+        // Reload when the upgrade menu saves new stats.
             PlayerStatsManager.Instance.OnStatsSaved += LoadSavedStats;
     }
 
@@ -38,13 +39,13 @@ public class PlayerStats : MonoBehaviour
             PlayerStatsManager.Instance.OnStatsSaved -= LoadSavedStats;
     }
 
-    // Gubben avgör om slaget blir en crit. Ett vapen kan ge extra chans.
+    // Rolls whether a hit is a crit. A weapon can add bonus chance.
     public bool RollCrit(int bonusChance = 0)
     {
         return UnityEngine.Random.Range(0, 100) < critChance + bonusChance;
     }
 
-    // Uppgraderingar
+    // Upgrades
     public void IncreaseStrength(int amount)
     {
         if (amount <= 0) return;
@@ -62,7 +63,7 @@ public class PlayerStats : MonoBehaviour
     public void IncreaseCritChance(int amount)
     {
         if (amount <= 0) return;
-        critChance = Mathf.Min(critChance + amount, 100);   // aldrig över 100 %
+        critChance = Mathf.Min(critChance + amount, 100);   // never above 100 %
         OnStatsChanged?.Invoke();
     }
 

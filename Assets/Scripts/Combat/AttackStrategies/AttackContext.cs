@@ -1,8 +1,6 @@
 using UnityEngine;
 
-// Allt en strategi behöver veta om EN attack.
-// Skickas in vid varje anrop, eftersom strategierna är delade assets
-// och inte får spara tillstånd själva.
+// Everything a strategy needs for one attack. Passed in on every call.
 public readonly struct AttackContext
 {
     public MonoBehaviour Owner { get; }

@@ -8,6 +8,7 @@ public class HealthBar : MonoBehaviour
 
     private void Awake()
     {
+        // Use the parent's Health if none is assigned in the Inspector.
         if (health == null)
             health = GetComponentInParent<Health>();
     }
@@ -30,6 +31,7 @@ public class HealthBar : MonoBehaviour
 
     private void UpdateBar(int current, int max)
     {
+        // Scales the fill bar horizontally from its pivot
         float ratio = (float)current / max;
         fillPivot.localScale = new Vector3(ratio, 1f, 1f);
         fillPivot.parent.gameObject.SetActive(!(hideWhenFull && current == max));

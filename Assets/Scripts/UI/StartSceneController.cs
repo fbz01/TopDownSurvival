@@ -18,6 +18,6 @@ public class StartSceneController : MonoBehaviour
 
         SessionData.PlayerName = playerName;
 
-        GameEvents.GameStateChanged(GameState.Playing);
+        GameEvents.GameStateChanged(GameState.Playing); // UIManager loads the game scene 
     }
 }

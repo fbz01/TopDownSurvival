@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+// Facade between the UI and the rest of the game: reacts to OnGameStateChanged
+// and loads scenes, shows panels and sets the time scale.
 public class UIManager : MonoBehaviour
 {
     [Header("Loading Subsystem")]
@@ -17,13 +19,12 @@ public class UIManager : MonoBehaviour
 
     private void OnEnable()
     {
-        // 1. Subscribe to the global game event system (Observer Pattern)
         GameEvents.OnGameStateChanged += HandleGameStateChanged;
     }
 
     private void OnDisable()
     {
-        // 2. IMPORTANT: Unsubscribe to prevent memory leaks if the UI is destroyed
+        // Unsubscribe so the static event doesn't keep a reference to a destroyed UIManager.
         GameEvents.OnGameStateChanged -= HandleGameStateChanged;
     }
 
@@ -33,22 +34,19 @@ public class UIManager : MonoBehaviour
 
         Debug.Log("MainMenuPanel referens: " +
             (mainMenuPanel != null ? mainMenuPanel.name : "NULL"));
-        
+
         ConfigureSystemSettings(GameState.Menu);
     }
 
-    /// <summary>
-    /// The event handler that responds whenever the GameEvents publisher fires an update
-    /// </summary>
+    // Menu and Playing need a scene change; the other states only change panels.
     private void HandleGameStateChanged(GameState newState)
     {
-        // Route settings immediately based on the state choice
         switch (newState)
         {
             case GameState.Menu:
                 EvaluateSceneTransition("StartScene", newState);
                 break;
-            
+
             case GameState.Playing:
                 EvaluateSceneTransition("Test_A", newState);
                 break;
@@ -66,11 +64,8 @@ public class UIManager : MonoBehaviour
                 break;
         }
     }
-    
-    /// <summary>
-    /// Checks the actively running scene name context against the targeted objective.
-    /// Triggers background loaders only if shifting between boundaries.
-    /// </summary>
+
+    //Loads the scene only if we're not already in it
     private void EvaluateSceneTransition(string targetSceneName, GameState targetState)
     {
         if (SceneManager.GetActiveScene().name != targetSceneName)
@@ -79,51 +74,40 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            // Already inside the requested scene context boundary: apply panel adjustments locally
             ConfigureSystemSettings(targetState);
         }
     }
 
-    /// <summary>
-    /// Smoothly runs an asynchronous scene load while keeping the loading bar animated, 
-    /// applying the requested GameState updates precisely when the screen shifts.
-    /// </summary>
+    // Loads the scene in the background while showing a loading bar.
     private IEnumerator LoadSceneAndTransitionStateAsync(string sceneName, GameState targetState)
     {
-        // 1. Immediately block the user's view with the loading screen
         loadingScreenPanel.SetActive(true);
         loadingProgressBar.value = 0f;
 
-        // Ensure time scale is unpaused so the scene loading thread isn't choked
-        Time.timeScale = 1f; 
+        // Time.timeScale = 1f;  → "Unpause in case we come from the pause menu."
+        Time.timeScale = 1f;
 
-        // 2. Start loading files on a background worker thread
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
 
-        // 3. Keep updating the slider via an Iterator routine until fully complete
         while (!operation.isDone)
         {
+            // Unity reports 0.9 when loading is done, so the progress is scaled to 0–1.
             float progress = Mathf.Clamp01(operation.progress / 0.9f);
             loadingProgressBar.value = progress;
 
-            yield return null; // Pauses execution and returns processing to Unity for the frame
+            yield return null;
         }
 
-        // 4. Scene loading finished! Configure the new structural states, timelines, and panels
         ConfigureSystemSettings(targetState);
 
-        // 5. Hide the loading overlay cleanly
         loadingScreenPanel.SetActive(false);
     }
 
-    /// <summary>
-    /// Internal helper method to route data settings, activate layouts, adjust cursors, 
-    /// and safely alter Unity's internal engine clock speeds.
-    /// </summary>
+    // Sets time scale, cursor and visible panels for each state.
     private void ConfigureSystemSettings(GameState state)
     {
         Debug.Log("GameState ändras till: " + state);
-        
+
         switch (state)
         {
             case GameState.Menu:
@@ -131,25 +115,25 @@ public class UIManager : MonoBehaviour
                 SetCursorStatus(true);
                 ToggleUIPanels(mainMenu: true, pause: false, upgrade: false, over: false);
                 break;
-            
+
             case GameState.Playing:
                 Time.timeScale = 1f;
                 SetCursorStatus(true);
                 ToggleUIPanels(mainMenu: false, pause: false, upgrade: false, over: false);
                 break;
-            
+
             case GameState.ChoosingUpgrade:
-                Time.timeScale = 0f; // Freeze core background processes
+                Time.timeScale = 0f; // pauses the game while the menu is open
                 SetCursorStatus(true);
                 ToggleUIPanels(mainMenu: false, pause: false, upgrade: true, over: false);
                 break;
-            
+
             case GameState.Paused:
-                Time.timeScale = 0f; // Freeze physics and frame updates
+                Time.timeScale = 0f; // pauses the game while the menu is open
                 SetCursorStatus(true);
                 ToggleUIPanels(mainMenu: false, pause: true, upgrade: false, over: false);
                 break;
-            
+
             case GameState.GameOver:
                 Time.timeScale = 1f;
                 SetCursorStatus(true);

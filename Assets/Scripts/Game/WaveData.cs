@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// Data asset for one wave: which enemies, how many, and the spawn interval.
 [System.Serializable]
 public class WaveEntry
 {
